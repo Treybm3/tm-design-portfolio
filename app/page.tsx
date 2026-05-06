@@ -89,7 +89,7 @@ export default function Page() {
     <main style={{ background: 'var(--bg)', color: 'var(--text)', overflowX: 'hidden' }}>
 
       {/* ── Fixed particle canvas — visible on ALL sections ── */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <ParticleCanvas />
       </div>
 
@@ -229,84 +229,80 @@ export default function Page() {
           WORK
       ══════════════════════════════════════════ */}
       <section id="work" className="relative py-24 px-6 z-10" style={{ background: 'rgba(12,14,26,0.85)', backdropFilter: 'blur(2px)' }}>
-
-        {/* Portfolio description banner */}
-        <div className="max-w-4xl mx-auto mb-6 px-6 py-5 rounded-2xl border text-sm leading-relaxed text-center"
-          style={{ borderColor: 'rgba(124,58,237,0.2)', background: 'rgba(124,58,237,0.06)', color: 'var(--muted)' }}>
-          These fully custom, automated sites are built with real business needs in mind. Easy navigation for clients,
-          all the info they need upfront, AI chat available 24/7, and SEO tags implemented so your business ranks
-          on Google — not buried on page five. No templates. No shortcuts. Just sites that actually work.
-        </div>
-
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-14">
+
+          <div className="text-center mb-6">
             <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>Portfolio</p>
             <h2 className="text-4xl sm:text-5xl font-black">Live Sites I Built</h2>
           </div>
 
-          <div className="flex flex-col gap-0">
-            {WORKS.map((w, i) => (
-              <div key={i}>
-                {/* Work row: card left, description right */}
-                <div className="flex flex-col md:flex-row items-center gap-10 py-10">
+          {/* Shared description */}
+          <p className="text-sm leading-relaxed text-center mb-14 mx-auto" style={{ color: 'var(--muted)', maxWidth: '560px' }}>
+            Fully custom, automated sites built with real business needs in mind. Easy navigation for clients,
+            all the info they need upfront, AI chat available 24/7, and SEO tags so your business ranks on
+            Google first. No templates. No shortcuts.
+          </p>
 
-                  {/* Sun glow card */}
-                  <div className="relative flex items-center justify-center shrink-0">
-                    <div className="absolute" style={{
-                      width: '300px', height: '300px',
-                      background: `radial-gradient(circle, ${w.sunColor} 0%, transparent 68%)`,
-                      filter: 'blur(22px)', borderRadius: '50%', zIndex: 0,
-                    }} />
-                    <a href={w.url} target="_blank" rel="noopener noreferrer"
-                      className="relative z-10 overflow-hidden rounded-2xl group"
-                      style={{ width: '240px', height: '240px', display: 'block', border: `1px solid ${w.border}`, background: 'var(--card)' }}
-                      aria-label={`Visit ${w.name}`}
-                    >
-                      <iframe src={w.url} title={w.name}
-                        style={{ width: '960px', height: '960px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
-                        loading="lazy"
-                      />
-                      {/* Click Me overlay */}
-                      <div className="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ background: 'linear-gradient(to top, rgba(5,6,15,0.75) 0%, transparent 60%)' }}>
-                        <span className="text-xs font-black tracking-widest uppercase"
-                          style={{ color: 'var(--purple-mid)', textShadow: '0 0 12px rgba(168,85,247,0.9), 0 0 24px rgba(168,85,247,0.5)', animation: 'pulse-glow 1.5s ease-in-out infinite' }}>
-                          Click Me
-                        </span>
-                      </div>
-                    </a>
-                  </div>
+          {/* Horizontal cards with vertical divider */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-0">
 
-                  {/* Description */}
-                  <div className="flex flex-col gap-4 flex-1 text-center md:text-left">
-                    <div>
-                      <p className="text-[10px] font-semibold tracking-[0.35em] uppercase mb-1" style={{ color: w.accent }}>{w.tag}</p>
-                      <h3 className="text-2xl font-black">{w.name}</h3>
-                    </div>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)', maxWidth: '340px' }}>{w.desc}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {['AI Chat','Booksy Booking','SEO Optimized','Custom Design'].map(tag => (
-                        <span key={tag} className="text-[10px] font-semibold px-2.5 py-1 rounded-full border"
-                          style={{ borderColor: `${w.border}`, color: w.accent, background: `${w.sunColor}18` }}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+            {/* Kris */}
+            <div className="relative flex items-center justify-center flex-1">
+              <div className="absolute" style={{ width: '300px', height: '300px', background: `radial-gradient(circle, ${WORKS[0].sunColor} 0%, transparent 68%)`, filter: 'blur(22px)', borderRadius: '50%', zIndex: 0 }} />
+              <div className="flex flex-col items-center gap-4 relative z-10">
+                <a href={WORKS[0].url} target="_blank" rel="noopener noreferrer"
+                  className="overflow-hidden rounded-2xl group"
+                  style={{ width: '220px', height: '220px', display: 'block', border: `1px solid ${WORKS[0].border}`, background: 'var(--card)' }}
+                >
+                  <iframe src={WORKS[0].url} title={WORKS[0].name}
+                    style={{ width: '880px', height: '880px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-end justify-center pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: 'linear-gradient(to top, rgba(5,6,15,0.8) 0%, transparent 60%)' }}>
+                    <span className="text-xs font-black tracking-widest uppercase"
+                      style={{ color: 'var(--purple-mid)', textShadow: '0 0 12px rgba(168,85,247,0.9)' }}>Click Me</span>
                   </div>
+                </a>
+                <div className="text-center">
+                  <p className="text-[10px] font-semibold tracking-[0.3em] uppercase mb-0.5" style={{ color: WORKS[0].accent }}>{WORKS[0].tag}</p>
+                  <p className="text-sm font-black">{WORKS[0].name}</p>
                 </div>
-
-                {/* Divider between items */}
-                {i < WORKS.length - 1 && (
-                  <div className="flex items-center gap-5 py-2">
-                    <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(124,58,237,0.35))' }} />
-                    <div className="flex items-center gap-2" style={{ color: 'rgba(124,58,237,0.55)' }}>
-                      <span style={{ fontSize: '10px', letterSpacing: '6px' }}>✦ ✦ ✦</span>
-                    </div>
-                    <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(124,58,237,0.35))' }} />
-                  </div>
-                )}
               </div>
-            ))}
+            </div>
+
+            {/* Vertical divider */}
+            <div className="flex flex-col items-center gap-3 px-6 py-8">
+              <div className="w-px flex-1 min-h-[80px]" style={{ background: 'linear-gradient(to bottom, transparent, rgba(124,58,237,0.5), transparent)' }} />
+              <span style={{ color: 'rgba(168,85,247,0.7)', fontSize: '16px', textShadow: '0 0 10px rgba(168,85,247,0.8)' }}>✦</span>
+              <div className="w-px flex-1 min-h-[80px]" style={{ background: 'linear-gradient(to bottom, transparent, rgba(124,58,237,0.5), transparent)' }} />
+            </div>
+
+            {/* Another Planet */}
+            <div className="relative flex items-center justify-center flex-1">
+              <div className="absolute" style={{ width: '300px', height: '300px', background: `radial-gradient(circle, ${WORKS[1].sunColor} 0%, transparent 68%)`, filter: 'blur(22px)', borderRadius: '50%', zIndex: 0 }} />
+              <div className="flex flex-col items-center gap-4 relative z-10">
+                <a href={WORKS[1].url} target="_blank" rel="noopener noreferrer"
+                  className="overflow-hidden rounded-2xl group"
+                  style={{ width: '220px', height: '220px', display: 'block', border: `1px solid ${WORKS[1].border}`, background: 'var(--card)' }}
+                >
+                  <iframe src={WORKS[1].url} title={WORKS[1].name}
+                    style={{ width: '880px', height: '880px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-end justify-center pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: 'linear-gradient(to top, rgba(5,6,15,0.8) 0%, transparent 60%)' }}>
+                    <span className="text-xs font-black tracking-widest uppercase"
+                      style={{ color: 'var(--purple-mid)', textShadow: '0 0 12px rgba(168,85,247,0.9)' }}>Click Me</span>
+                  </div>
+                </a>
+                <div className="text-center">
+                  <p className="text-[10px] font-semibold tracking-[0.3em] uppercase mb-0.5" style={{ color: WORKS[1].accent }}>{WORKS[1].tag}</p>
+                  <p className="text-sm font-black">{WORKS[1].name}</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -345,40 +341,60 @@ export default function Page() {
           ABOUT
       ══════════════════════════════════════════ */}
       <section id="about" className="relative py-24 px-6 z-10" style={{ background: 'rgba(12,14,26,0.85)', backdropFilter: 'blur(2px)' }}>
-        <div className="max-w-3xl mx-auto text-center flex flex-col items-center gap-8">
-          <p className="text-xs font-semibold tracking-[0.4em] uppercase" style={{ color: 'var(--purple-mid)' }}>About</p>
-          <h2 className="text-4xl sm:text-5xl font-black">The Person Behind It</h2>
-
-          <div className="text-base leading-relaxed" style={{ color: 'var(--muted)', maxWidth: '560px' }}>
-            <p>
-              My name is Trey Macklin. I&apos;m a college student at Michigan State University
-              pursuing my master&apos;s degree, and I&apos;ve been around computers my whole life — from
-              gaming and building Minecraft servers in Java as a kid, to teaching myself web
-              development before AI tools were even a thing.
-            </p>
-            <p className="mt-4">
-              Over time I started noticing the same problems in local businesses — no real online
-              presence, no efficient way to handle clients, nothing that made them stand out. So
-              I started building the solution. Custom websites and automation tools that take that
-              stress off your plate and let your business run smoother, look sharper, and grow faster.
-            </p>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>About</p>
+            <h2 className="text-4xl sm:text-5xl font-black">The Person Behind It</h2>
           </div>
 
-          <div className="grid grid-cols-3 gap-5 w-full max-w-sm pt-2">
-            {[
-              { value: '2+', label: 'Sites Launched' },
-              { value: 'AI',  label: 'Chat Built In' },
-              { value: '$0',  label: 'Templates Used' },
-            ].map((s, i) => (
-              <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border"
-                style={{ borderColor: 'var(--border)', background: 'var(--card)' }}>
-                <div className="text-2xl font-black"
-                  style={{ background: 'linear-gradient(135deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  {s.value}
-                </div>
-                <div className="text-[11px] text-center leading-tight" style={{ color: 'var(--muted)' }}>{s.label}</div>
+          <div className="flex flex-col md:flex-row items-center gap-12">
+
+            {/* Photo */}
+            <div className="relative shrink-0 flex items-center justify-center">
+              <div className="absolute" style={{ width: '280px', height: '280px', background: 'radial-gradient(circle, rgba(124,58,237,0.4) 0%, transparent 70%)', filter: 'blur(20px)', borderRadius: '50%' }} />
+              <img
+                src="/aboutme.jpg"
+                alt="Trey Macklin"
+                className="relative z-10 rounded-2xl object-cover"
+                style={{ width: '220px', height: '260px', border: '1px solid rgba(124,58,237,0.35)', boxShadow: '0 0 40px rgba(124,58,237,0.25)' }}
+              />
+            </div>
+
+            {/* Bio */}
+            <div className="flex flex-col gap-6 flex-1">
+              <div className="text-base leading-relaxed" style={{ color: 'var(--muted)' }}>
+                <p>
+                  My name is Trey Macklin. I&apos;m a college student at Michigan State University
+                  pursuing my master&apos;s degree, and I&apos;ve been around computers my whole life — from
+                  gaming and building Minecraft servers in Java as a kid, to teaching myself web
+                  development long before AI tools were even a thing.
+                </p>
+                <p className="mt-4">
+                  Over time I started noticing the same problems showing up in local businesses — no
+                  real online presence, no efficient way to handle clients, nothing that made them
+                  stand out. So I started building the solution. Custom websites and automation tools
+                  that take that stress off your plate and let your business run smoother, look
+                  sharper, and grow faster.
+                </p>
               </div>
-            ))}
+
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  { value: '2+', label: 'Sites Launched' },
+                  { value: 'AI',  label: 'Chat Built In' },
+                  { value: '$0',  label: 'Templates Used' },
+                ].map((s, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border"
+                    style={{ borderColor: 'var(--border)', background: 'var(--card)' }}>
+                    <div className="text-2xl font-black"
+                      style={{ background: 'linear-gradient(135deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                      {s.value}
+                    </div>
+                    <div className="text-[11px] text-center leading-tight" style={{ color: 'var(--muted)' }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
