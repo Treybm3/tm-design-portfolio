@@ -360,7 +360,7 @@ export default function Page() {
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3">
-                {[{ value: '2+', label: 'Sites Launched' }, { value: 'AI', label: 'Chat Built In' }, { value: '$0', label: 'Templates Used' }].map((s, i) => (
+                {[{ value: '100%', label: 'Custom Code' }, { value: '2 wk', label: 'Avg Launch' }, { value: '24/7', label: 'AI Always On' }].map((s, i) => (
                   <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border" style={{ borderColor: 'rgba(245,158,11,0.25)', background: 'rgba(245,158,11,0.07)' }}>
                     <div className="text-2xl font-black" style={{ color: '#f59e0b', textShadow: '0 0 18px rgba(245,158,11,0.9), 0 0 40px rgba(251,191,36,0.55), 0 0 70px rgba(245,158,11,0.25)' }}>{s.value}</div>
                     <div className="text-[11px] text-center leading-tight" style={{ color: 'rgba(251,191,36,0.65)' }}>{s.label}</div>
@@ -373,50 +373,131 @@ export default function Page() {
       </section>
 
       {/* ══ CONTACT ══ */}
-      <section id="contact" className="relative py-24 px-6 z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>Contact Me</p>
-            <h2 className="text-4xl sm:text-5xl font-black">Let&apos;s Build Something</h2>
-            <p className="text-sm mt-4" style={{ color: 'var(--muted)' }}>Ready to get your business online? Here&apos;s how it works.</p>
+      <section id="contact" className="relative py-24 px-6 z-10" style={{ background: 'rgba(12,14,26,0.92)' }}>
+        <div className="max-w-5xl mx-auto">
+
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
+              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Contact Me</span>
+              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-black mb-4">Let&apos;s Talk About Your Business</h2>
+            <p className="text-sm leading-relaxed max-w-lg mx-auto" style={{ color: 'var(--muted)' }}>
+              Not sure what you need? That&apos;s exactly why you should reach out. I&apos;ll listen to
+              where your business is at and tell you exactly what would help — no pressure, no jargon.
+            </p>
           </div>
 
-          {/* How it works */}
-          <div className="grid grid-cols-3 gap-4 mb-12">
-            {[
-              { n: '01', title: 'Reach Out', desc: 'Call, text, or DM. We talk about what your business needs.' },
-              { n: '02', title: 'We Plan It', desc: 'I design around your brand. No templates, no guessing.' },
-              { n: '03', title: 'You Launch', desc: 'Site goes live in ~2 weeks. I stay on to keep it sharp.' },
-            ].map(s => (
-              <div key={s.n} className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl border"
-                style={{ borderColor: 'var(--border)', background: 'rgba(17,20,40,0.6)' }}>
-                <div className="text-2xl font-black" style={{ background: 'linear-gradient(135deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.n}</div>
-                <div className="font-bold text-sm">{s.title}</div>
-                <div className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</div>
+          {/* Two-column layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+            {/* Left — what we'll cover */}
+            <div className="flex flex-col gap-6 p-8 rounded-2xl border"
+              style={{ borderColor: 'rgba(124,58,237,0.25)', background: 'rgba(124,58,237,0.05)' }}>
+              <div>
+                <p className="text-xs font-semibold tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>What We&apos;ll Cover</p>
+                <h3 className="text-xl font-black mb-2">One conversation is all it takes.</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                  Whether you want a full site, AI chat, booking integration, or you&apos;re
+                  just curious about what&apos;s possible — reach out and I&apos;ll walk you through it.
+                  Every project starts with a real conversation, not a form.
+                </p>
               </div>
-            ))}
-          </div>
+              <div className="flex flex-col gap-3">
+                {[
+                  'What your business actually needs online',
+                  'Whether AI chat would make a difference for you',
+                  'How long it takes and what it costs — honestly',
+                  'What separates a TM Design site from the rest',
+                  'How to keep it running and growing after launch',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="flex items-center mt-1 shrink-0">
+                      <div className="w-2 h-2 rounded-full" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9)' }} />
+                      <div className="h-[2px] w-8" style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.8), rgba(168,85,247,0.05))', marginLeft: '-1px' }} />
+                    </div>
+                    <span className="text-sm" style={{ color: 'var(--muted)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          {/* Contact buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-            <a href="tel:7253770241"
-              className="flex items-center justify-center gap-3 px-6 py-4 font-bold text-sm tracking-wide transition-all flex-1"
-              style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', borderRadius: '10px', boxShadow: '0 0 26px rgba(124,58,237,0.45)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 36px rgba(168,85,247,0.65)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 26px rgba(124,58,237,0.45)'; e.currentTarget.style.transform = 'translateY(0)' }}
-            ><Phone size={16} /> Call / Text</a>
-            <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 px-6 py-4 font-semibold text-sm transition-all flex-1"
-              style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.35)', color: '#c4b5fd', borderRadius: '10px', boxShadow: '0 0 18px rgba(124,58,237,0.2)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(124,58,237,0.5)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(124,58,237,0.2)'; e.currentTarget.style.transform = 'translateY(0)' }}
-            ><IconFacebook /> Facebook</a>
-            <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 px-6 py-4 font-semibold text-sm transition-all flex-1"
-              style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.35)', color: '#67e8f9', borderRadius: '10px', boxShadow: '0 0 18px rgba(6,182,212,0.18)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(6,182,212,0.45)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(6,182,212,0.18)'; e.currentTarget.style.transform = 'translateY(0)' }}
-            ><IconInstagram /> Instagram</a>
+            {/* Right — contact methods */}
+            <div className="flex flex-col gap-4">
+
+              {/* Best way — call/text */}
+              <div className="relative p-6 rounded-2xl border overflow-hidden"
+                style={{ borderColor: 'rgba(168,85,247,0.45)', background: 'rgba(124,58,237,0.1)', boxShadow: '0 0 40px rgba(124,58,237,0.15)' }}>
+                <div className="absolute top-3 right-3 text-[9px] font-black tracking-[0.2em] uppercase px-2 py-0.5 rounded-full"
+                  style={{ background: 'rgba(168,85,247,0.3)', color: '#c4b5fd', border: '1px solid rgba(168,85,247,0.4)' }}>Best Way</div>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                    style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))' }}>
+                    <Phone size={15} color="#fff" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-sm">Call or Text</div>
+                    <div className="text-xs" style={{ color: 'var(--purple-mid)' }}>725-377-0241</div>
+                  </div>
+                </div>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
+                  The fastest way to get real answers. Call or text me directly — I respond quickly and I&apos;ll tell you straight up what your business needs.
+                </p>
+                <a href="tel:7253770241"
+                  className="flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm w-full transition-all"
+                  style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', boxShadow: '0 0 20px rgba(124,58,237,0.4)' }}
+                  onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(168,85,247,0.65)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+                  onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 20px rgba(124,58,237,0.4)'; e.currentTarget.style.transform = 'translateY(0)' }}
+                ><Phone size={14} /> 725-377-0241</a>
+              </div>
+
+              {/* Facebook */}
+              <div className="p-5 rounded-2xl border flex items-center gap-4 transition-all"
+                style={{ borderColor: 'rgba(124,58,237,0.2)', background: 'rgba(124,58,237,0.05)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(168,85,247,0.4)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.1)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(124,58,237,0.2)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.05)' }}
+              >
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.4)', color: '#c4b5fd' }}>
+                  <IconFacebook size={16} />
+                </div>
+                <div className="flex-1">
+                  <div className="font-bold text-sm mb-0.5">Facebook DM</div>
+                  <p className="text-xs" style={{ color: 'var(--muted)' }}>Good for sharing details, photos of your space, or longer back-and-forth questions.</p>
+                </div>
+                <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
+                  className="text-xs font-bold px-4 py-2 rounded-full shrink-0 transition-all"
+                  style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.4)', color: '#c4b5fd' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.35)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.2)' }}
+                >Message</a>
+              </div>
+
+              {/* Instagram */}
+              <div className="p-5 rounded-2xl border flex items-center gap-4 transition-all"
+                style={{ borderColor: 'rgba(6,182,212,0.15)', background: 'rgba(6,182,212,0.04)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(6,182,212,0.35)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(6,182,212,0.08)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(6,182,212,0.15)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(6,182,212,0.04)' }}
+              >
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.35)', color: '#67e8f9' }}>
+                  <IconInstagram size={16} />
+                </div>
+                <div className="flex-1">
+                  <div className="font-bold text-sm mb-0.5">Instagram</div>
+                  <p className="text-xs" style={{ color: 'var(--muted)' }}>See the work and follow along @treybm3. DMs are open — reach out anytime.</p>
+                </div>
+                <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
+                  className="text-xs font-bold px-4 py-2 rounded-full shrink-0 transition-all"
+                  style={{ background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.35)', color: '#67e8f9' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.28)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.15)' }}
+                >Follow</a>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
