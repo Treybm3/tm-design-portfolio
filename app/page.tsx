@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Phone, ChevronRight } from 'lucide-react'
 import ChatWidget from './components/ChatWidget'
 
@@ -11,24 +11,14 @@ function IconInstagram({ size = 18 }: { size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
 }
 
-const SkillIcons: Record<string, React.ReactElement> = {
-  code:      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
-  bot:       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>,
-  chart:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
-  megaphone: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>,
-  link:      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>,
-  camera:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>,
-  seo:       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-}
 
 const SKILLS = [
-  { key: 'code',      name: 'Custom Websites',        desc: 'Built from scratch around your brand. No templates — designed to convert visitors into paying customers.' },
-  { key: 'bot',       name: 'AI Chat',                desc: 'A 24/7 AI assistant that answers questions and keeps customers engaged even when you\'re closed.' },
-  { key: 'chart',     name: 'Analytics Dashboard',    desc: 'See who\'s visiting, where they\'re from, and what they\'re clicking. Real data for real decisions.' },
-  { key: 'megaphone', name: 'Social Media Marketing', desc: 'Get your business in front of the right people on Facebook, Instagram, and more.' },
-  { key: 'link',      name: 'Social Media Sync',      desc: 'Your Instagram and Facebook connected directly to your site — always fresh, always relevant.' },
-  { key: 'camera',    name: 'Photography',            desc: 'Professional photos that make your site stand out. We handle the shoot.' },
-  { key: 'seo',       name: 'SEO Optimization',       desc: 'Built-in search tags so your business shows up on Google first — not buried on page five.' },
+  { name: 'Custom Websites',        desc: 'Built from scratch around your brand. No templates — every line of code designed to convert visitors into paying customers.' },
+  { name: 'AI Chat',                desc: 'A 24/7 AI assistant that answers questions and keeps customers engaged even when you\'re closed.' },
+  { name: 'SEO Optimization',       desc: 'Built-in search tags so your business shows up on Google first — not buried on page five.' },
+  { name: 'Social Media Marketing', desc: 'Get your business in front of the right people on Facebook, Instagram, and more.' },
+  { name: 'Booking Integration',    desc: 'Booksy, Calendly, or any platform — seamlessly built into your site so clients can book in one tap.' },
+  { name: 'Photography',            desc: 'Professional photos that make your site stand out. Real images of your business, your way.' },
 ]
 
 const WORKS = [
@@ -285,24 +275,43 @@ export default function Page() {
             </p>
           </div>
 
-          {/* Symmetric 3-col grid */}
+          {/* 3×2 card grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {SKILLS.map((s, i) => (
-              <div key={i} className="flex flex-col gap-3 p-6 rounded-2xl border transition-all"
-                style={{ borderColor: 'rgba(124,58,237,0.2)', background: 'rgba(124,58,237,0.05)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(168,85,247,0.5)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.1)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(124,58,237,0.2)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.05)' }}
+              <div key={i}
+                className="flex flex-col items-center text-center gap-5 p-8 rounded-3xl border transition-all"
+                style={{
+                  borderColor: 'rgba(124,58,237,0.22)',
+                  background: 'linear-gradient(145deg, rgba(30,18,60,0.85) 0%, rgba(15,10,40,0.75) 100%)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+                  transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLDivElement
+                  el.style.borderColor = 'rgba(168,85,247,0.55)'
+                  el.style.boxShadow = '0 8px 40px rgba(124,58,237,0.25), 0 0 0 1px rgba(168,85,247,0.15)'
+                  el.style.transform = 'translateY(-4px)'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLDivElement
+                  el.style.borderColor = 'rgba(124,58,237,0.22)'
+                  el.style.boxShadow = '0 8px 32px rgba(0,0,0,0.35)'
+                  el.style.transform = 'translateY(0)'
+                }}
               >
-                {/* Glowing bullet-dash */}
-                <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full shrink-0"
-                    style={{ background: '#a855f7', boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.6)' }} />
-                  <div className="h-[3px] w-14 -ml-px"
-                    style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.9) 0%, rgba(168,85,247,0.1) 100%)', borderRadius: '0 2px 2px 0' }} />
+                {/* Icon circle with beaming purple orb */}
+                <div className="w-16 h-16 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(124,58,237,0.18)', border: '1px solid rgba(168,85,247,0.3)' }}>
+                  <div className="w-4 h-4 rounded-full"
+                    style={{
+                      background: 'radial-gradient(circle, #d8b4fe 0%, #a855f7 55%, #7c3aed 100%)',
+                      boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.75), 0 0 40px rgba(168,85,247,0.4), 0 0 65px rgba(124,58,237,0.2)',
+                    }} />
                 </div>
-                <div>
-                  <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--text)' }}>{s.name}</h3>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</p>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-black text-base" style={{ color: 'var(--text)' }}>{s.name}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(200,195,230,0.65)' }}>{s.desc}</p>
                 </div>
               </div>
             ))}
