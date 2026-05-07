@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import type { CSSProperties } from 'react'
 import { Phone, ChevronRight } from 'lucide-react'
 import ChatWidget from './components/ChatWidget'
 
@@ -12,29 +13,32 @@ function IconInstagram({ size = 18 }: { size?: number }) {
 }
 
 const SKILLS = [
-  { name: 'Analytics Dashboard',   desc: 'See who is visiting your site, where they are from, and what they are clicking in real time. Compare stats and track growth with real numbers, not guesses.' },
-  { name: 'Live Instagram Feed',   desc: 'Your latest Instagram posts automatically appear on your website. Every time you post, your site updates too. Fresh content without lifting a finger.' },
-  { name: 'Custom Websites',       desc: 'Built from scratch around your brand. No templates. Every line of code designed to convert visitors into paying customers.' },
-  { name: 'AI Chat',               desc: 'A 24/7 AI assistant that answers questions and keeps customers engaged even when you are closed.' },
-  { name: 'SEO Optimization',      desc: 'Search tags built in so your business shows up on Google first. Not buried on page five.' },
-  { name: 'Social Media Marketing',desc: 'Get your business in front of the right people on Facebook, Instagram, and more.' },
-  { name: 'Booking Integration',   desc: 'Booksy, Calendly, or any platform. Built seamlessly into your site so clients can book in one tap.' },
-  { name: 'Photography',           desc: 'Professional photos that make your site stand out. Real images of your business, your way.' },
+  { name: 'Analytics Dashboard',    desc: 'See who is visiting your site, where they are from, and what they are clicking in real time. Compare stats and track growth with real numbers, not guesses.' },
+  { name: 'Live Instagram Feed',    desc: 'Your latest Instagram posts automatically appear on your website. Every time you post, your site updates too. Fresh content without lifting a finger.' },
+  { name: 'Custom Websites',        desc: 'Built from scratch around your brand. No templates. Every line of code designed to convert visitors into paying customers.' },
+  { name: 'AI Chat',                desc: 'A 24/7 AI assistant that answers questions and keeps customers engaged even when you are closed.' },
+  { name: 'SEO Optimization',       desc: 'Search tags built in so your business shows up on Google first. Not buried on page five.' },
+  { name: 'Social Media Marketing', desc: 'Get your business in front of the right people on Facebook, Instagram, and more.' },
+  { name: 'Booking Integration',    desc: 'Booksy, Calendly, or any platform. Built seamlessly into your site so clients can book in one tap.' },
+  { name: 'Photography',            desc: 'Professional photos that make your site stand out. Real images of your business, your way.' },
 ]
 
 const WORKS = [
-  { name: 'Kris Professional Cuts',    url: 'https://krisprofessionalcuts.com',              sunColor: 'rgba(59,130,246,0.55)',  border: 'rgba(59,130,246,0.4)', accent: '#60a5fa', tag: 'Barbershop · Lansing, MI' },
-  { name: 'Another Planet Barbershop', url: 'https://another-planet-barbershop.vercel.app', sunColor: 'rgba(249,115,22,0.55)',  border: 'rgba(249,115,22,0.4)', accent: '#fb923c', tag: 'Barbershop · Lansing, MI' },
+  { name: 'Kris Professional Cuts',    url: 'https://krisprofessionalcuts.com',              color: '#3b82f6', border: 'rgba(59,130,246,0.4)',  tag: 'Barbershop · Lansing, MI', delay: '0s' },
+  { name: 'Another Planet Barbershop', url: 'https://another-planet-barbershop.vercel.app', color: '#f97316', border: 'rgba(249,115,22,0.4)',   tag: 'Barbershop · Lansing, MI', delay: '1.3s' },
 ]
+
+const FEATURES = ['One-tap booking', '24/7 AI chat', 'SEO built in', 'Zero templates', 'Mobile-first', 'Custom design']
 
 const LINE1 = 'TM Design'
 const LINE2 = 'Where your thoughts become reality'
 const PHOTOS = ['/aboutme.jpg', '/msufan.jpg', '/ship.jpg']
 
-const PILL = {
-  base: { background: 'linear-gradient(135deg, #7c3aed, #a855f7)', color: '#fff', borderRadius: '100px', boxShadow: '0 0 28px rgba(124,58,237,0.5), 0 4px 16px rgba(0,0,0,0.3)' } as React.CSSProperties,
-  hover: { boxShadow: '0 0 44px rgba(168,85,247,0.7), 0 4px 20px rgba(0,0,0,0.4)', transform: 'translateY(-2px)' },
-  leave: { boxShadow: '0 0 28px rgba(124,58,237,0.5), 0 4px 16px rgba(0,0,0,0.3)', transform: 'translateY(0)' },
+const pillBase: CSSProperties = {
+  background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
+  color: '#fff',
+  borderRadius: '100px',
+  boxShadow: '0 0 28px rgba(124,58,237,0.5), 0 4px 16px rgba(0,0,0,0.3)',
 }
 
 export default function Page() {
@@ -76,18 +80,18 @@ export default function Page() {
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <main style={{ background: 'var(--bg)', color: 'var(--text)' }}>
+    <main style={{ background: 'var(--bg)', color: 'var(--text)', paddingBottom: '72px' }} className="sm:pb-0">
 
       {/* Fixed galaxy background */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <GalaxyCanvas />
       </div>
 
-      {/* ── Navbar — always visible ── */}
+      {/* ── Navbar ── */}
       <nav className="fixed top-0 left-0 right-0 z-50"
         style={{ background: 'rgba(4,5,14,0.92)', backdropFilter: 'blur(18px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <button onClick={scrollTop} className="flex flex-col leading-none text-left transition-opacity hover:opacity-80">
+          <button onClick={scrollTop} className="flex flex-col leading-none text-left hover:opacity-80 transition-opacity">
             <span className="font-black text-lg tracking-tight"
               style={{ background: 'linear-gradient(90deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               TM Design
@@ -104,20 +108,20 @@ export default function Page() {
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>{l}</a>
             ))}
             <a href="#contact"
-              className="text-sm font-bold px-6 py-2.5 transition-all"
-              style={{ ...PILL.base, fontSize: '13px' }}
-              onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
-              onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
-            >Contact</a>
+              className="text-sm font-black px-6 py-2.5 transition-all hidden sm:block"
+              style={{ ...pillBase }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.7)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
+            >Contact Trey</a>
           </div>
         </div>
       </nav>
 
       {/* ══ HERO ══ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 35%, rgba(109,40,217,0.38) 0%, rgba(76,29,149,0.15) 50%, transparent 75%)' }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 40% at 80% 10%, rgba(124,58,237,0.2) 0%, transparent 60%)' }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 40% 35% at 10% 85%, rgba(6,182,212,0.12) 0%, transparent 65%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 35%, rgba(109,40,217,0.35) 0%, rgba(76,29,149,0.12) 55%, transparent 75%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 40% at 80% 10%, rgba(124,58,237,0.18) 0%, transparent 60%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 40% 35% at 10% 85%, rgba(6,182,212,0.1) 0%, transparent 65%)' }} />
 
         <div className="relative text-center max-w-3xl mx-auto px-6 pt-28 pb-24 flex flex-col items-center gap-7">
           <div className="text-xs font-semibold tracking-[0.4em] uppercase px-4 py-1.5 rounded-full border"
@@ -131,8 +135,7 @@ export default function Page() {
               {line1}
               {phase <= 1 && <span className="inline-block w-[3px] align-middle ml-1 rounded" style={{ height: '0.85em', background: 'var(--cyan)', animation: 'type-cursor 1s step-end infinite' }} />}
             </h1>
-            <div className="text-xl sm:text-2xl font-semibold min-h-[2rem]"
-              style={{ color: 'rgba(200,190,255,0.85)', letterSpacing: '0.01em' }}>
+            <div className="text-xl sm:text-2xl font-semibold min-h-[2rem]" style={{ color: 'rgba(200,190,255,0.85)', letterSpacing: '0.01em' }}>
               {line2}
               {phase === 2 && <span className="inline-block w-[2px] align-middle ml-0.5 rounded" style={{ height: '0.8em', background: 'rgba(200,190,255,0.85)', animation: 'type-cursor 1s step-end infinite' }} />}
             </div>
@@ -146,9 +149,9 @@ export default function Page() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#work"
               className="flex items-center justify-center gap-2 px-10 py-4 font-black text-sm tracking-wide transition-all"
-              style={{ ...PILL.base }}
-              onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
-              onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
+              style={{ ...pillBase }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.7)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
             >See My Work <ChevronRight size={15} /></a>
             <a href="#contact"
               className="flex items-center justify-center gap-2 px-10 py-4 font-bold text-sm transition-all"
@@ -182,9 +185,8 @@ export default function Page() {
       </section>
 
       {/* ══ WORK ══ */}
-      <section id="work" className="relative py-24 px-6 z-10" style={{ background: 'rgba(10,12,24,0.9)' }}>
+      <section id="work" className="relative py-24 px-6 z-10">
         <div className="max-w-5xl mx-auto">
-
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-5">
               <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
@@ -194,68 +196,72 @@ export default function Page() {
             <h2 className="text-4xl sm:text-5xl font-black">Sites I&apos;ve Built for People</h2>
           </div>
 
-          {/* Two preview cards + description */}
           <div className="flex flex-col lg:flex-row items-center gap-12">
-
-            {/* Cards with names ABOVE */}
+            {/* Cards */}
             <div className="flex flex-row items-center gap-0 shrink-0">
               {WORKS.map((w, i) => (
                 <div key={i} className="flex flex-row items-center">
                   <div className="relative flex items-center justify-center">
-                    <div className="absolute" style={{ width: '340px', height: '340px', background: `radial-gradient(circle, ${w.sunColor} 0%, transparent 60%)`, filter: 'blur(30px)', borderRadius: '50%', zIndex: 0 }} />
+                    {/* Lightsaber-pulsing glow */}
+                    <div className="absolute" style={{
+                      width: '340px', height: '340px',
+                      background: `radial-gradient(circle, ${w.color}99 0%, ${w.color}33 45%, transparent 68%)`,
+                      borderRadius: '50%', zIndex: 0,
+                      animation: `lightsaber-pulse 2.8s ease-in-out infinite`,
+                      animationDelay: w.delay,
+                    }} />
                     <div className="flex flex-col items-center gap-3 relative z-10">
-                      {/* Name and tag ABOVE the preview */}
                       <div className="text-center">
-                        <p className="text-xs font-semibold tracking-[0.25em] uppercase mb-1" style={{ color: w.accent }}>{w.tag}</p>
+                        <p className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-1" style={{ color: w.color }}>{w.tag}</p>
                         <p className="text-sm font-black">{w.name}</p>
                       </div>
                       <a href={w.url} target="_blank" rel="noopener noreferrer"
                         className="relative overflow-hidden rounded-2xl"
-                        style={{ width: '240px', height: '240px', display: 'block', border: `1.5px solid ${w.border}`, background: 'var(--card)', boxShadow: `0 0 36px ${w.sunColor}` }}
+                        style={{ width: '240px', height: '240px', display: 'block', border: `1.5px solid ${w.border}`, background: 'var(--card)', boxShadow: `0 0 30px ${w.color}55` }}
                       >
                         <iframe src={w.url} title={w.name}
                           style={{ width: '960px', height: '960px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
                           loading="lazy"
                         />
-                        {/* Click Me — glowing text only, no box */}
+                        {/* Click Me — green glow, no box */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-xs font-black tracking-[0.3em] uppercase"
-                            style={{ color: '#fbbf24', textShadow: '0 0 18px rgba(251,191,36,1), 0 0 36px rgba(251,191,36,0.7), 0 0 60px rgba(251,191,36,0.35)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
+                          <span className="text-sm font-black tracking-[0.25em] uppercase"
+                            style={{ color: '#4ade80', textShadow: '0 0 16px rgba(74,222,128,1), 0 0 32px rgba(74,222,128,0.8), 0 0 60px rgba(74,222,128,0.4)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
                             Click Me
                           </span>
                         </div>
                       </a>
                     </div>
                   </div>
-
                   {i === 0 && (
-                    <div className="flex flex-col items-center gap-2 px-5 self-stretch justify-center">
-                      <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.55), transparent)' }} />
+                    <div className="flex flex-col items-center gap-2 px-6 self-stretch justify-center">
+                      <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.5), transparent)' }} />
                       <span style={{ color: 'rgba(168,85,247,0.8)', fontSize: '14px', textShadow: '0 0 12px rgba(168,85,247,0.9)' }}>✦</span>
-                      <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.55), transparent)' }} />
+                      <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.5), transparent)' }} />
                     </div>
                   )}
                 </div>
               ))}
             </div>
 
-            {/* Description */}
+            {/* Description + horizontal feature list */}
             <div className="flex flex-col gap-5 flex-1 text-center lg:text-left">
               <div>
                 <p className="text-xs font-semibold tracking-[0.35em] uppercase mb-2" style={{ color: 'var(--purple-mid)' }}>What These Sites Do</p>
                 <h3 className="text-2xl font-black mb-4">Built for Real Businesses</h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
-                  Fully custom and automated, built with the business owner in mind. Clients can
-                  book appointments in one tap, get answers from an AI assistant around the clock, and find
-                  the shop instantly on Google. No templates, no shortcuts.
-                  Every site is unique and designed to make the business look like the best option in the room.
+                  Fully custom and automated, built with the business owner in mind. Clients book in one tap,
+                  get answers from an AI assistant around the clock, and find the shop instantly on Google.
+                  No templates, no shortcuts. Every site is designed to make the business look like the best option in the room.
                 </p>
               </div>
-              <div className="flex flex-col gap-2">
-                {['One-tap Booksy booking','24/7 AI chat assistant','SEO that ranks on Google','Custom design, zero templates','Mobile-first, lightning fast'].map(f => (
-                  <div key={f} className="flex items-center gap-2.5">
-                    <div className="w-2 h-2 rounded-full shrink-0" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9)' }} />
-                    <span className="text-sm" style={{ color: 'var(--muted)' }}>{f}</span>
+              {/* Horizontal feature chips */}
+              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                {FEATURES.map(f => (
+                  <div key={f} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+                    style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.28)' }}>
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#a855f7', boxShadow: '0 0 6px rgba(168,85,247,0.9)' }} />
+                    <span className="text-xs font-medium" style={{ color: 'rgba(200,190,255,0.8)' }}>{f}</span>
                   </div>
                 ))}
               </div>
@@ -269,7 +275,7 @@ export default function Page() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-14 items-start">
 
-            {/* Left — sticky description */}
+            {/* Left — description */}
             <div className="lg:w-[300px] shrink-0 lg:sticky lg:top-24 flex flex-col gap-6">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
@@ -280,30 +286,24 @@ export default function Page() {
                 <div style={{ width: '36px', height: '3px', background: 'linear-gradient(to right, var(--purple-mid), var(--cyan))', borderRadius: '2px' }} />
               </div>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
-                Every service is built around one goal: making your business run smoother, look sharper, and grow faster. Real tools for real problems — and I am always learning the newest ways to make that happen.
+                Every service is built around one goal: making your business run smoother, look sharper, and grow faster. Real tools for real problems, and I am always learning the newest ways to make that happen.
               </p>
-              <a href="#contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 font-black text-sm transition-all self-start"
-                style={{ ...PILL.base }}
-                onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
-                onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
-              >Get Started</a>
             </div>
 
-            {/* Right — 2-col card grid */}
+            {/* Right — 2-col grid */}
             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {SKILLS.map((s, i) => (
                 <div key={i}
                   className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl border"
                   style={{
                     borderColor: 'rgba(124,58,237,0.22)',
-                    background: 'linear-gradient(145deg, rgba(28,16,58,0.85) 0%, rgba(12,8,38,0.75) 100%)',
-                    backdropFilter: 'blur(12px)',
-                    boxShadow: '0 6px 28px rgba(0,0,0,0.3)',
+                    background: 'linear-gradient(145deg, rgba(28,16,58,0.7) 0%, rgba(12,8,38,0.6) 100%)',
+                    backdropFilter: 'blur(14px)',
+                    boxShadow: '0 6px 28px rgba(0,0,0,0.25)',
                     transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
                   }}
                   onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(168,85,247,0.5)'; el.style.boxShadow = '0 8px 36px rgba(124,58,237,0.22)'; el.style.transform = 'translateY(-3px)' }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(124,58,237,0.22)'; el.style.boxShadow = '0 6px 28px rgba(0,0,0,0.3)'; el.style.transform = 'translateY(0)' }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(124,58,237,0.22)'; el.style.boxShadow = '0 6px 28px rgba(0,0,0,0.25)'; el.style.transform = 'translateY(0)' }}
                 >
                   <div className="w-14 h-14 rounded-full flex items-center justify-center"
                     style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(168,85,247,0.28)' }}>
@@ -317,13 +317,12 @@ export default function Page() {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </section>
 
       {/* ══ ABOUT ══ */}
-      <section id="about" className="relative py-24 px-6 z-10" style={{ background: 'rgba(10,12,24,0.9)' }}>
+      <section id="about" className="relative py-24 px-6 z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -358,8 +357,7 @@ export default function Page() {
                   Over time I started noticing the same problems in local businesses. No real online
                   presence, no efficient way to handle clients, nothing that made them stand out. So
                   I started building the solution. Custom websites and automation tools that take
-                  that stress off your plate and let your business run smoother, look sharper, and
-                  grow faster.
+                  that stress off your plate and let your business run smoother, look sharper, and grow faster.
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -388,29 +386,22 @@ export default function Page() {
             <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Contact Me</span>
             <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
           </div>
-
           <h2 className="text-4xl sm:text-5xl font-black mb-5">Let&apos;s Talk About Your Business</h2>
-
-          <p className="text-sm leading-relaxed mb-10" style={{ color: 'var(--muted)', maxWidth: '480px', margin: '0 auto 2.5rem' }}>
-            Not sure what you need? That is exactly why you should reach out. Whether it is a full site, AI chat, booking, or just questions — I will tell you straight what makes sense for your business. One conversation is all it takes.
+          <p className="text-sm leading-relaxed mb-10 mx-auto" style={{ color: 'var(--muted)', maxWidth: '460px' }}>
+            Not sure what you need? That is exactly why you should reach out. Whether it is a full site, AI chat, booking, or just questions — I will tell you straight what makes sense for your business.
           </p>
 
-          {/* Big phone CTA */}
           <a href="tel:7253770241"
-            className="inline-flex items-center gap-3 px-12 py-5 font-black text-lg transition-all mb-10"
-            style={{ ...PILL.base, fontSize: '18px' }}
-            onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
-            onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
-          >
-            <Phone size={22} /> 725-377-0241
-          </a>
+            className="inline-flex items-center gap-3 px-12 py-5 font-black transition-all mb-10"
+            style={{ ...pillBase, fontSize: '18px' }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 50px rgba(168,85,247,0.75)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
+          ><Phone size={22} /> 725-377-0241</a>
 
           <p className="text-xs mb-5" style={{ color: 'var(--dim)' }}>Or find me on</p>
-
-          {/* Social links — no boxes, just clean row */}
           <div className="flex items-center justify-center gap-8 mb-16">
             <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-semibold transition-all"
+              className="flex items-center gap-2 text-sm font-semibold transition-colors"
               style={{ color: 'var(--muted)' }}
               onMouseEnter={e => { e.currentTarget.style.color = '#c4b5fd' }}
               onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}>
@@ -418,7 +409,7 @@ export default function Page() {
             </a>
             <div className="w-px h-4" style={{ background: 'var(--border)' }} />
             <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-semibold transition-all"
+              className="flex items-center gap-2 text-sm font-semibold transition-colors"
               style={{ color: 'var(--muted)' }}
               onMouseEnter={e => { e.currentTarget.style.color = '#67e8f9' }}
               onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}>
@@ -426,14 +417,13 @@ export default function Page() {
             </a>
           </div>
 
-          {/* What we will cover */}
           <div className="text-left max-w-sm mx-auto">
             <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-4" style={{ color: 'var(--dim)' }}>What we will cover</p>
             <div className="flex flex-col gap-3">
               {[
                 'What your business actually needs online',
                 'Whether AI chat would make a difference for you',
-                'How long it takes and what it costs — honestly',
+                'How long it takes and what it costs, honestly',
                 'What separates a TM Design site from the rest',
                 'How to keep it running and growing after launch',
               ].map((item, i) => (
@@ -447,7 +437,6 @@ export default function Page() {
               ))}
             </div>
           </div>
-
         </div>
       </section>
 
@@ -463,6 +452,19 @@ export default function Page() {
           <p className="text-xs" style={{ color: 'var(--dim)' }}>Lansing, MI · 2025</p>
         </div>
       </footer>
+
+      {/* Mobile sticky bottom bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 sm:hidden"
+        style={{ background: 'rgba(4,5,14,0.96)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(124,58,237,0.3)' }}>
+        <div className="px-4 py-3">
+          <a href="tel:7253770241"
+            className="flex items-center justify-center gap-2 w-full py-3.5 font-black text-sm transition-all"
+            style={{ ...pillBase }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 40px rgba(168,85,247,0.7)' }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string }}
+          ><Phone size={16} /> Contact Trey</a>
+        </div>
+      </div>
 
     </main>
   )
@@ -503,7 +505,6 @@ function GalaxyCanvas() {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-
       for (const s of stars) {
         s.twinkle += s.speed
         const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle))
@@ -512,8 +513,6 @@ function GalaxyCanvas() {
         ctx.fillStyle = s.hue === 270 ? `rgba(210,170,255,${alpha})` : s.hue === 210 ? `rgba(160,215,255,${alpha})` : `rgba(255,255,255,${alpha})`
         ctx.fill()
       }
-
-      // Spawn shooting stars — frequent, from anywhere across top 70%
       if (Math.random() < 0.022 && shooters.length < 10) {
         const angle = (Math.random() * 40 + 15) * Math.PI / 180
         const spd = Math.random() * 9 + 5
@@ -528,7 +527,6 @@ function GalaxyCanvas() {
           width: Math.random() * 1.4 + 0.8,
         })
       }
-
       for (let i = shooters.length - 1; i >= 0; i--) {
         const s = shooters[i]
         const alpha = Math.sin((s.life / s.maxLife) * Math.PI)
@@ -536,20 +534,13 @@ function GalaxyCanvas() {
         grad.addColorStop(0, `rgba(255,255,255,${alpha})`)
         grad.addColorStop(0.35, `rgba(210,185,255,${alpha * 0.65})`)
         grad.addColorStop(1, 'rgba(255,255,255,0)')
-        ctx.beginPath()
-        ctx.moveTo(s.x, s.y)
-        ctx.lineTo(s.x - s.vx * s.tail, s.y - s.vy * s.tail)
-        ctx.strokeStyle = grad
-        ctx.lineWidth = s.width
-        ctx.stroke()
-        ctx.beginPath()
-        ctx.arc(s.x, s.y, s.width, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255,255,255,${alpha})`
-        ctx.fill()
+        ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.vx * s.tail, s.y - s.vy * s.tail)
+        ctx.strokeStyle = grad; ctx.lineWidth = s.width; ctx.stroke()
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.width, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`; ctx.fill()
         s.x += s.vx; s.y += s.vy; s.life++
         if (s.life >= s.maxLife || s.x > canvas.width + 80 || s.y > canvas.height + 80) shooters.splice(i, 1)
       }
-
       raf = requestAnimationFrame(draw)
     }
     draw()
