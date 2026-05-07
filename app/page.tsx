@@ -383,63 +383,98 @@ export default function Page() {
 
       {/* ══ CONTACT ══ */}
       <section id="contact" className="relative py-28 px-6 z-10">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto">
 
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
             <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Contact Me</span>
             <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
           </div>
-          <h2 className="text-4xl sm:text-5xl font-black mb-5">Let&apos;s Talk About Your Business</h2>
-          <p className="text-sm leading-relaxed mb-10 mx-auto" style={{ color: 'var(--muted)', maxWidth: '460px' }}>
-            Not sure what you need? That is exactly why you should reach out. Whether it is a full site, AI chat, booking, or just questions — I will tell you straight what makes sense for your business.
-          </p>
+          <h2 className="text-4xl sm:text-5xl font-black text-center mb-14">Let&apos;s Talk About Your Business</h2>
 
-          <a href="tel:7253770241"
-            className="inline-flex items-center gap-3 px-12 py-5 font-black transition-all mb-10"
-            style={{ ...pillBase, fontSize: '18px' }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 50px rgba(168,85,247,0.75)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
-          ><Phone size={22} /> 725-377-0241</a>
+          <div className="flex flex-col lg:flex-row gap-10 items-start">
 
-          <p className="text-xs mb-5" style={{ color: 'var(--dim)' }}>Or find me on</p>
-          <div className="flex items-center justify-center gap-8 mb-16">
-            <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-semibold transition-colors"
-              style={{ color: 'var(--muted)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#c4b5fd' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}>
-              <IconFacebook size={18} /> Facebook
-            </a>
-            <div className="w-px h-4" style={{ background: 'var(--border)' }} />
-            <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-semibold transition-colors"
-              style={{ color: 'var(--muted)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#67e8f9' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}>
-              <IconInstagram size={18} /> @treybm3
-            </a>
-          </div>
+            {/* Left — description + what we'll cover */}
+            <div className="flex-1 flex flex-col gap-8">
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                Not sure what you need? That is exactly why you should reach out. I will tell you straight what makes sense for your business — no upsell, no fluff.
+              </p>
 
-          <div className="text-left max-w-sm mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-4" style={{ color: 'var(--dim)' }}>What we will cover</p>
-            <div className="flex flex-col gap-3">
-              {[
-                'What your business actually needs online',
-                'Whether AI chat would make a difference for you',
-                'How long it takes and what it costs, honestly',
-                'What separates a TM Design site from the rest',
-                'How to keep it running and growing after launch',
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="flex items-center mt-1 shrink-0">
-                    <div className="w-2 h-2 rounded-full" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9)' }} />
-                    <div className="h-[2px] w-6" style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.7), transparent)', marginLeft: '-1px' }} />
-                  </div>
-                  <span className="text-sm" style={{ color: 'var(--muted)' }}>{item}</span>
+              <div>
+                <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-5" style={{ color: 'var(--dim)' }}>What we will cover</p>
+                <div className="flex flex-col gap-4">
+                  {[
+                    'What your business actually needs online',
+                    'What a site like this could realistically do for your revenue',
+                    'Whether AI chat would make a difference for you',
+                    'How long it takes and what it costs, honestly',
+                    'What the process looks like from day one to launch',
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="flex items-center mt-[5px] shrink-0">
+                        <div className="w-2 h-2 rounded-full" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9), 0 0 16px rgba(168,85,247,0.5)' }} />
+                        <div className="h-[2px] w-6" style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.7), transparent)', marginLeft: '-1px' }} />
+                      </div>
+                      <span className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{item}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
+
+            {/* Right — purple glowing contact card */}
+            <div className="lg:w-[340px] shrink-0 w-full rounded-3xl p-8 flex flex-col gap-7 relative overflow-hidden"
+              style={{
+                background: 'linear-gradient(145deg, rgba(109,40,217,0.18) 0%, rgba(28,16,58,0.55) 100%)',
+                border: '1px solid rgba(124,58,237,0.5)',
+                boxShadow: '0 0 60px rgba(124,58,237,0.35), 0 0 120px rgba(124,58,237,0.12), inset 0 1px 0 rgba(255,255,255,0.06)',
+                backdropFilter: 'blur(18px)',
+              }}>
+              {/* Ambient glow inside card */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                style={{ width: '200px', height: '120px', background: 'radial-gradient(ellipse, rgba(168,85,247,0.3) 0%, transparent 70%)', filter: 'blur(20px)' }} />
+
+              <div className="relative z-10">
+                <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-2" style={{ color: 'rgba(168,85,247,0.7)' }}>Call or Text</p>
+                <a href="tel:7253770241"
+                  className="block font-black transition-all leading-none"
+                  style={{ fontSize: '32px', color: '#f97316', textShadow: '0 0 20px rgba(249,115,22,0.7), 0 0 40px rgba(249,115,22,0.35)', letterSpacing: '-0.01em' }}
+                  onMouseEnter={e => { e.currentTarget.style.textShadow = '0 0 28px rgba(249,115,22,0.95), 0 0 56px rgba(249,115,22,0.5)' }}
+                  onMouseLeave={e => { e.currentTarget.style.textShadow = '0 0 20px rgba(249,115,22,0.7), 0 0 40px rgba(249,115,22,0.35)' }}
+                >725-377-0241</a>
+                <p className="text-xs mt-1.5" style={{ color: 'rgba(240,240,255,0.35)' }}>Lansing, MI · Available daily</p>
+              </div>
+
+              <div className="h-px w-full relative z-10" style={{ background: 'rgba(124,58,237,0.3)' }} />
+
+              <div className="relative z-10 flex flex-col gap-3">
+                <p className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: 'rgba(168,85,247,0.7)' }}>Find Me On</p>
+                <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all"
+                  style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.25)', color: 'rgba(200,190,255,0.8)' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.22)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.5)'; e.currentTarget.style.color = '#c4b5fd' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.1)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.25)'; e.currentTarget.style.color = 'rgba(200,190,255,0.8)' }}>
+                  <IconFacebook size={16} />
+                  <span className="text-sm font-semibold">Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all"
+                  style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', color: 'rgba(103,232,249,0.8)' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.18)'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.45)'; e.currentTarget.style.color = '#67e8f9' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.08)'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.2)'; e.currentTarget.style.color = 'rgba(103,232,249,0.8)' }}>
+                  <IconInstagram size={16} />
+                  <span className="text-sm font-semibold">@treybm3</span>
+                </a>
+              </div>
+
+              <a href="tel:7253770241"
+                className="relative z-10 flex items-center justify-center gap-2 w-full py-4 font-black text-sm transition-all"
+                style={{ ...pillBase }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.75)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
+              ><Phone size={16} /> Contact Trey</a>
+            </div>
+
           </div>
         </div>
       </section>
