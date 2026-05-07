@@ -11,34 +11,39 @@ function IconInstagram({ size = 18 }: { size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
 }
 
-
 const SKILLS = [
-  { name: 'Custom Websites',        desc: 'Built from scratch around your brand. No templates — every line of code designed to convert visitors into paying customers.' },
-  { name: 'AI Chat',                desc: 'A 24/7 AI assistant that answers questions and keeps customers engaged even when you\'re closed.' },
-  { name: 'SEO Optimization',       desc: 'Built-in search tags so your business shows up on Google first — not buried on page five.' },
-  { name: 'Social Media Marketing', desc: 'Get your business in front of the right people on Facebook, Instagram, and more.' },
-  { name: 'Booking Integration',    desc: 'Booksy, Calendly, or any platform — seamlessly built into your site so clients can book in one tap.' },
-  { name: 'Photography',            desc: 'Professional photos that make your site stand out. Real images of your business, your way.' },
+  { name: 'Analytics Dashboard',   desc: 'See who is visiting your site, where they are from, and what they are clicking in real time. Compare stats and track growth with real numbers, not guesses.' },
+  { name: 'Live Instagram Feed',   desc: 'Your latest Instagram posts automatically appear on your website. Every time you post, your site updates too. Fresh content without lifting a finger.' },
+  { name: 'Custom Websites',       desc: 'Built from scratch around your brand. No templates. Every line of code designed to convert visitors into paying customers.' },
+  { name: 'AI Chat',               desc: 'A 24/7 AI assistant that answers questions and keeps customers engaged even when you are closed.' },
+  { name: 'SEO Optimization',      desc: 'Search tags built in so your business shows up on Google first. Not buried on page five.' },
+  { name: 'Social Media Marketing',desc: 'Get your business in front of the right people on Facebook, Instagram, and more.' },
+  { name: 'Booking Integration',   desc: 'Booksy, Calendly, or any platform. Built seamlessly into your site so clients can book in one tap.' },
+  { name: 'Photography',           desc: 'Professional photos that make your site stand out. Real images of your business, your way.' },
 ]
 
 const WORKS = [
-  { name: 'Kris Professional Cuts',   url: 'https://krisprofessionalcuts.com',               sunColor: 'rgba(59,130,246,0.6)',  border: 'rgba(59,130,246,0.45)', accent: '#3b82f6', tag: 'Barbershop · Lansing, MI' },
-  { name: 'Another Planet Barbershop', url: 'https://another-planet-barbershop.vercel.app',  sunColor: 'rgba(249,115,22,0.6)',  border: 'rgba(249,115,22,0.45)', accent: '#f97316', tag: 'Barbershop · Lansing, MI' },
+  { name: 'Kris Professional Cuts',    url: 'https://krisprofessionalcuts.com',              sunColor: 'rgba(59,130,246,0.55)',  border: 'rgba(59,130,246,0.4)', accent: '#60a5fa', tag: 'Barbershop · Lansing, MI' },
+  { name: 'Another Planet Barbershop', url: 'https://another-planet-barbershop.vercel.app', sunColor: 'rgba(249,115,22,0.55)',  border: 'rgba(249,115,22,0.4)', accent: '#fb923c', tag: 'Barbershop · Lansing, MI' },
 ]
 
 const LINE1 = 'TM Design'
 const LINE2 = 'Where your thoughts become reality'
 const PHOTOS = ['/aboutme.jpg', '/msufan.jpg', '/ship.jpg']
 
+const PILL = {
+  base: { background: 'linear-gradient(135deg, #7c3aed, #a855f7)', color: '#fff', borderRadius: '100px', boxShadow: '0 0 28px rgba(124,58,237,0.5), 0 4px 16px rgba(0,0,0,0.3)' } as React.CSSProperties,
+  hover: { boxShadow: '0 0 44px rgba(168,85,247,0.7), 0 4px 20px rgba(0,0,0,0.4)', transform: 'translateY(-2px)' },
+  leave: { boxShadow: '0 0 28px rgba(124,58,237,0.5), 0 4px 16px rgba(0,0,0,0.3)', transform: 'translateY(0)' },
+}
+
 export default function Page() {
   const [line1,    setLine1]    = useState('')
   const [line2,    setLine2]    = useState('')
   const [phase,    setPhase]    = useState(0)
-  const [scrolled, setScrolled] = useState(false)
   const [photoIdx, setPhotoIdx] = useState(0)
   const [photoVis, setPhotoVis] = useState(true)
 
-  // Two-line typing loop: type LINE1, pause, type LINE2, pause, reset, repeat
   useEffect(() => {
     if (phase === 0) {
       let i = 0
@@ -60,7 +65,6 @@ export default function Page() {
     }
   }, [phase])
 
-  // Photo carousel with fade
   useEffect(() => {
     const id = setInterval(() => {
       setPhotoVis(false)
@@ -69,42 +73,41 @@ export default function Page() {
     return () => clearInterval(id)
   }, [])
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', fn)
-    return () => window.removeEventListener('scroll', fn)
-  }, [])
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <main style={{ background: 'var(--bg)', color: 'var(--text)' }}>
 
-      {/* Fixed particles */}
+      {/* Fixed galaxy background */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <GalaxyCanvas />
       </div>
 
-      {/* ── Navbar ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{ background: scrolled ? 'rgba(5,6,15,0.94)' : 'transparent', backdropFilter: scrolled ? 'blur(16px)' : 'none', borderBottom: scrolled ? '1px solid var(--border)' : 'none' }}>
+      {/* ── Navbar — always visible ── */}
+      <nav className="fixed top-0 left-0 right-0 z-50"
+        style={{ background: 'rgba(4,5,14,0.92)', backdropFilter: 'blur(18px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex flex-col leading-none">
+          <button onClick={scrollTop} className="flex flex-col leading-none text-left transition-opacity hover:opacity-80">
             <span className="font-black text-lg tracking-tight"
               style={{ background: 'linear-gradient(90deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               TM Design
             </span>
             <span className="text-[9px] tracking-[0.15em]" style={{ color: 'var(--dim)' }}>Where your thoughts become reality</span>
-          </div>
+          </button>
           <div className="flex items-center gap-6">
-            {[['Work','#work'],['Skills','#skills'],['About','#about'],['Contact','#contact']].map(([l,h]) => (
+            <button onClick={scrollTop} className="text-sm font-medium transition-colors hidden sm:block" style={{ color: 'var(--muted)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>Home</button>
+            {[['Work','#work'],['Skills','#skills'],['About','#about']].map(([l,h]) => (
               <a key={l} href={h} className="text-sm font-medium transition-colors hidden sm:block" style={{ color: 'var(--muted)' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>{l}</a>
             ))}
             <a href="#contact"
-              className="text-sm font-bold px-5 py-2 rounded-full transition-all"
-              style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', boxShadow: '0 0 18px rgba(124,58,237,0.4)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(168,85,247,0.6)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(124,58,237,0.4)' }}
+              className="text-sm font-bold px-6 py-2.5 transition-all"
+              style={{ ...PILL.base, fontSize: '13px' }}
+              onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
+              onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
             >Contact</a>
           </div>
         </div>
@@ -112,9 +115,9 @@ export default function Page() {
 
       {/* ══ HERO ══ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 85% 75% at 50% 40%, rgba(109,40,217,0.42) 0%, rgba(76,29,149,0.2) 45%, transparent 72%)' }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 55% 45% at 75% 15%, rgba(124,58,237,0.25) 0%, transparent 65%)' }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 45% 40% at 15% 80%, rgba(6,182,212,0.15) 0%, transparent 65%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 35%, rgba(109,40,217,0.38) 0%, rgba(76,29,149,0.15) 50%, transparent 75%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 40% at 80% 10%, rgba(124,58,237,0.2) 0%, transparent 60%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 40% 35% at 10% 85%, rgba(6,182,212,0.12) 0%, transparent 65%)' }} />
 
         <div className="relative text-center max-w-3xl mx-auto px-6 pt-28 pb-24 flex flex-col items-center gap-7">
           <div className="text-xs font-semibold tracking-[0.4em] uppercase px-4 py-1.5 rounded-full border"
@@ -140,17 +143,17 @@ export default function Page() {
             Fast. Sharp. Built to convert.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#work"
-              className="flex items-center justify-center gap-2 px-8 py-4 font-bold text-sm tracking-wide transition-all"
-              style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', borderRadius: '10px', boxShadow: '0 0 30px rgba(124,58,237,0.5), 0 4px 15px rgba(0,0,0,0.3)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 42px rgba(168,85,247,0.65), 0 4px 20px rgba(0,0,0,0.4)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(124,58,237,0.5), 0 4px 15px rgba(0,0,0,0.3)'; e.currentTarget.style.transform = 'translateY(0)' }}
+              className="flex items-center justify-center gap-2 px-10 py-4 font-black text-sm tracking-wide transition-all"
+              style={{ ...PILL.base }}
+              onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
+              onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
             >See My Work <ChevronRight size={15} /></a>
             <a href="#contact"
-              className="flex items-center justify-center gap-2 px-8 py-4 font-semibold text-sm transition-all border"
-              style={{ borderRadius: '10px', borderColor: 'rgba(124,58,237,0.5)', color: 'rgba(220,215,255,0.85)', background: 'rgba(124,58,237,0.08)' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; e.currentTarget.style.background = 'rgba(124,58,237,0.18)'; e.currentTarget.style.color = '#fff' }}
+              className="flex items-center justify-center gap-2 px-10 py-4 font-bold text-sm transition-all"
+              style={{ borderRadius: '100px', border: '1px solid rgba(124,58,237,0.5)', color: 'rgba(220,215,255,0.85)', background: 'rgba(124,58,237,0.08)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; e.currentTarget.style.background = 'rgba(124,58,237,0.2)'; e.currentTarget.style.color = '#fff' }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)'; e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.color = 'rgba(220,215,255,0.85)' }}
             >Get in Touch</a>
           </div>
@@ -179,47 +182,52 @@ export default function Page() {
       </section>
 
       {/* ══ WORK ══ */}
-      <section id="work" className="relative py-24 px-6 z-10" style={{ background: 'rgba(12,14,26,0.88)' }}>
+      <section id="work" className="relative py-24 px-6 z-10" style={{ background: 'rgba(10,12,24,0.9)' }}>
         <div className="max-w-5xl mx-auto">
+
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>Portfolio</p>
-            <h2 className="text-4xl sm:text-5xl font-black">Sites I've Made for Clients</h2>
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
+              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Portfolio</span>
+              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-black">Sites I&apos;ve Built for People</h2>
           </div>
 
-          {/* Cards LEFT + Description RIGHT */}
+          {/* Two preview cards + description */}
           <div className="flex flex-col lg:flex-row items-center gap-12">
 
-            {/* Two cards with divider */}
+            {/* Cards with names ABOVE */}
             <div className="flex flex-row items-center gap-0 shrink-0">
               {WORKS.map((w, i) => (
                 <div key={i} className="flex flex-row items-center">
-                  {/* Card */}
                   <div className="relative flex items-center justify-center">
-                    {/* Sun glow — bigger */}
-                    <div className="absolute" style={{ width: '320px', height: '320px', background: `radial-gradient(circle, ${w.sunColor} 0%, transparent 62%)`, filter: 'blur(28px)', borderRadius: '50%', zIndex: 0 }} />
+                    <div className="absolute" style={{ width: '340px', height: '340px', background: `radial-gradient(circle, ${w.sunColor} 0%, transparent 60%)`, filter: 'blur(30px)', borderRadius: '50%', zIndex: 0 }} />
                     <div className="flex flex-col items-center gap-3 relative z-10">
+                      {/* Name and tag ABOVE the preview */}
+                      <div className="text-center">
+                        <p className="text-xs font-semibold tracking-[0.25em] uppercase mb-1" style={{ color: w.accent }}>{w.tag}</p>
+                        <p className="text-sm font-black">{w.name}</p>
+                      </div>
                       <a href={w.url} target="_blank" rel="noopener noreferrer"
                         className="relative overflow-hidden rounded-2xl"
-                        style={{ width: '200px', height: '200px', display: 'block', border: `1.5px solid ${w.border}`, background: 'var(--card)', boxShadow: `0 0 30px ${w.sunColor}` }}
+                        style={{ width: '240px', height: '240px', display: 'block', border: `1.5px solid ${w.border}`, background: 'var(--card)', boxShadow: `0 0 36px ${w.sunColor}` }}
                       >
                         <iframe src={w.url} title={w.name}
-                          style={{ width: '800px', height: '800px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
+                          style={{ width: '960px', height: '960px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
                           loading="lazy"
                         />
-                        {/* Centered Click Me badge */}
+                        {/* Click Me — glowing text only, no box */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-[9px] font-black tracking-[0.2em] uppercase px-2.5 py-1 rounded-full"
-                            style={{ background: '#fbbf24', color: '#000', boxShadow: '0 0 16px rgba(251,191,36,0.95), 0 0 32px rgba(251,191,36,0.5)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
+                          <span className="text-xs font-black tracking-[0.3em] uppercase"
+                            style={{ color: '#fbbf24', textShadow: '0 0 18px rgba(251,191,36,1), 0 0 36px rgba(251,191,36,0.7), 0 0 60px rgba(251,191,36,0.35)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
                             Click Me
                           </span>
                         </div>
                       </a>
-                      <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-center" style={{ color: w.accent }}>{w.tag}</p>
-                      <p className="text-xs font-black text-center">{w.name}</p>
                     </div>
                   </div>
 
-                  {/* Vertical divider between cards */}
                   {i === 0 && (
                     <div className="flex flex-col items-center gap-2 px-5 self-stretch justify-center">
                       <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.55), transparent)' }} />
@@ -231,23 +239,22 @@ export default function Page() {
               ))}
             </div>
 
-            {/* Description on the RIGHT */}
+            {/* Description */}
             <div className="flex flex-col gap-5 flex-1 text-center lg:text-left">
               <div>
                 <p className="text-xs font-semibold tracking-[0.35em] uppercase mb-2" style={{ color: 'var(--purple-mid)' }}>What These Sites Do</p>
                 <h3 className="text-2xl font-black mb-4">Built for Real Businesses</h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
-                  Fully custom and automated — built with the business owner in mind. Clients can
-                  book appointments in one tap, get answers from an AI assistant 24/7, and find
-                  the shop instantly on Google thanks to built-in SEO. No templates, no shortcuts.
-                  Every site is unique and designed to make the business look like the best option
-                  in the room.
+                  Fully custom and automated, built with the business owner in mind. Clients can
+                  book appointments in one tap, get answers from an AI assistant around the clock, and find
+                  the shop instantly on Google. No templates, no shortcuts.
+                  Every site is unique and designed to make the business look like the best option in the room.
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                {['One-tap Booksy booking','24/7 AI chat assistant','SEO — ranks on Google','Custom design, zero templates','Mobile-first, lightning fast'].map(f => (
+                {['One-tap Booksy booking','24/7 AI chat assistant','SEO that ranks on Google','Custom design, zero templates','Mobile-first, lightning fast'].map(f => (
                   <div key={f} className="flex items-center gap-2.5">
-                    <span style={{ color: 'var(--purple-mid)', textShadow: '0 0 8px rgba(168,85,247,0.7)' }}>✦</span>
+                    <div className="w-2 h-2 rounded-full shrink-0" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9)' }} />
                     <span className="text-sm" style={{ color: 'var(--muted)' }}>{f}</span>
                   </div>
                 ))}
@@ -259,87 +266,75 @@ export default function Page() {
 
       {/* ══ SKILLS ══ */}
       <section id="skills" className="relative py-24 px-6 z-10">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-14 items-start">
 
-          {/* Centered header */}
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
-              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>My Skills</span>
-              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-black mb-4">What I Bring to the Table</h2>
-            <p className="text-sm leading-relaxed max-w-md mx-auto" style={{ color: 'var(--muted)' }}>
-              Every service is built around one goal — making your business run smoother,
-              look sharper, and grow faster.
-            </p>
-          </div>
-
-          {/* 3×2 card grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SKILLS.map((s, i) => (
-              <div key={i}
-                className="flex flex-col items-center text-center gap-5 p-8 rounded-3xl border transition-all"
-                style={{
-                  borderColor: 'rgba(124,58,237,0.22)',
-                  background: 'linear-gradient(145deg, rgba(30,18,60,0.85) 0%, rgba(15,10,40,0.75) 100%)',
-                  backdropFilter: 'blur(12px)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
-                  transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLDivElement
-                  el.style.borderColor = 'rgba(168,85,247,0.55)'
-                  el.style.boxShadow = '0 8px 40px rgba(124,58,237,0.25), 0 0 0 1px rgba(168,85,247,0.15)'
-                  el.style.transform = 'translateY(-4px)'
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLDivElement
-                  el.style.borderColor = 'rgba(124,58,237,0.22)'
-                  el.style.boxShadow = '0 8px 32px rgba(0,0,0,0.35)'
-                  el.style.transform = 'translateY(0)'
-                }}
-              >
-                {/* Icon circle with beaming purple orb */}
-                <div className="w-16 h-16 rounded-full flex items-center justify-center"
-                  style={{ background: 'rgba(124,58,237,0.18)', border: '1px solid rgba(168,85,247,0.3)' }}>
-                  <div className="w-4 h-4 rounded-full"
-                    style={{
-                      background: 'radial-gradient(circle, #d8b4fe 0%, #a855f7 55%, #7c3aed 100%)',
-                      boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.75), 0 0 40px rgba(168,85,247,0.4), 0 0 65px rgba(124,58,237,0.2)',
-                    }} />
+            {/* Left — sticky description */}
+            <div className="lg:w-[300px] shrink-0 lg:sticky lg:top-24 flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
+                  <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>My Skills</span>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="font-black text-base" style={{ color: 'var(--text)' }}>{s.name}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(200,195,230,0.65)' }}>{s.desc}</p>
-                </div>
+                <h2 className="text-3xl sm:text-4xl font-black leading-tight">What I Bring to the Table</h2>
+                <div style={{ width: '36px', height: '3px', background: 'linear-gradient(to right, var(--purple-mid), var(--cyan))', borderRadius: '2px' }} />
               </div>
-            ))}
-          </div>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                Every service is built around one goal: making your business run smoother, look sharper, and grow faster. Real tools for real problems — and I am always learning the newest ways to make that happen.
+              </p>
+              <a href="#contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 font-black text-sm transition-all self-start"
+                style={{ ...PILL.base }}
+                onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
+                onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
+              >Get Started</a>
+            </div>
 
-          {/* Centered CTA */}
-          <div className="flex justify-center mt-12">
-            <a href="#contact"
-              className="px-8 py-3.5 rounded-full text-sm font-bold tracking-wide transition-all"
-              style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', boxShadow: '0 0 24px rgba(124,58,237,0.45)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 36px rgba(168,85,247,0.65)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(124,58,237,0.45)'; e.currentTarget.style.transform = 'translateY(0)' }}
-            >Get Started</a>
-          </div>
+            {/* Right — 2-col card grid */}
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {SKILLS.map((s, i) => (
+                <div key={i}
+                  className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl border"
+                  style={{
+                    borderColor: 'rgba(124,58,237,0.22)',
+                    background: 'linear-gradient(145deg, rgba(28,16,58,0.85) 0%, rgba(12,8,38,0.75) 100%)',
+                    backdropFilter: 'blur(12px)',
+                    boxShadow: '0 6px 28px rgba(0,0,0,0.3)',
+                    transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(168,85,247,0.5)'; el.style.boxShadow = '0 8px 36px rgba(124,58,237,0.22)'; el.style.transform = 'translateY(-3px)' }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(124,58,237,0.22)'; el.style.boxShadow = '0 6px 28px rgba(0,0,0,0.3)'; el.style.transform = 'translateY(0)' }}
+                >
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center"
+                    style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(168,85,247,0.28)' }}>
+                    <div className="w-3.5 h-3.5 rounded-full"
+                      style={{ background: 'radial-gradient(circle, #e9d5ff 0%, #a855f7 50%, #7c3aed 100%)', boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.75), 0 0 40px rgba(168,85,247,0.4)' }} />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="font-black text-sm" style={{ color: 'var(--text)' }}>{s.name}</h3>
+                    <p className="text-xs leading-relaxed" style={{ color: 'rgba(200,195,230,0.62)' }}>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
+          </div>
         </div>
       </section>
 
       {/* ══ ABOUT ══ */}
-      <section id="about" className="relative py-24 px-6 z-10" style={{ background: 'rgba(12,14,26,0.88)' }}>
+      <section id="about" className="relative py-24 px-6 z-10" style={{ background: 'rgba(10,12,24,0.9)' }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>About</p>
-            <h2 className="text-4xl sm:text-5xl font-black">The Person Behind It</h2>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
+              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>About</span>
+              <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-black">About Trey</h2>
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-12">
-            {/* Photo — cropped to right side where Trey is */}
             <div className="relative shrink-0 flex items-center justify-center">
               <div className="absolute" style={{ width: '260px', height: '260px', background: 'radial-gradient(circle, rgba(124,58,237,0.45) 0%, transparent 70%)', filter: 'blur(22px)', borderRadius: '50%' }} />
               <div className="relative z-10 overflow-hidden rounded-2xl"
@@ -351,17 +346,16 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Bio */}
             <div className="flex flex-col gap-6 flex-1">
               <div className="text-base leading-relaxed" style={{ color: 'var(--muted)' }}>
                 <p>
-                  My name is Trey. I&apos;m a college student at Michigan State University pursuing
-                  my master&apos;s degree, and I&apos;ve been around computers my whole life — from gaming
+                  My name is Trey. I am a college student at Michigan State University pursuing
+                  my master&apos;s degree, and I have been around computers my whole life. From gaming
                   and building Minecraft servers in Java as a kid, to teaching myself web development
                   long before AI tools were even a thing.
                 </p>
                 <p className="mt-4">
-                  Over time I started noticing the same problems in local businesses — no real online
+                  Over time I started noticing the same problems in local businesses. No real online
                   presence, no efficient way to handle clients, nothing that made them stand out. So
                   I started building the solution. Custom websites and automation tools that take
                   that stress off your plate and let your business run smoother, look sharper, and
@@ -369,9 +363,13 @@ export default function Page() {
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3">
-                {[{ value: '100%', label: 'Custom Code' }, { value: '2 wk', label: 'Avg Launch' }, { value: '24/7', label: 'AI Always On' }].map((s, i) => (
+                {[
+                  { value: '∞',    label: 'Always Evolving' },
+                  { value: '2 wk', label: 'Avg Launch' },
+                  { value: '24/7', label: 'AI Always On' },
+                ].map((s, i) => (
                   <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border" style={{ borderColor: 'rgba(245,158,11,0.25)', background: 'rgba(245,158,11,0.07)' }}>
-                    <div className="text-2xl font-black" style={{ color: '#f59e0b', textShadow: '0 0 18px rgba(245,158,11,0.9), 0 0 40px rgba(251,191,36,0.55), 0 0 70px rgba(245,158,11,0.25)' }}>{s.value}</div>
+                    <div className="text-2xl font-black" style={{ color: '#f59e0b', textShadow: '0 0 18px rgba(245,158,11,0.9), 0 0 40px rgba(251,191,36,0.55)' }}>{s.value}</div>
                     <div className="text-[11px] text-center leading-tight" style={{ color: 'rgba(251,191,36,0.65)' }}>{s.label}</div>
                   </div>
                 ))}
@@ -382,132 +380,74 @@ export default function Page() {
       </section>
 
       {/* ══ CONTACT ══ */}
-      <section id="contact" className="relative py-24 px-6 z-10" style={{ background: 'rgba(12,14,26,0.92)' }}>
-        <div className="max-w-5xl mx-auto">
+      <section id="contact" className="relative py-28 px-6 z-10">
+        <div className="max-w-2xl mx-auto text-center">
 
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
-              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Contact Me</span>
-              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-black mb-4">Let&apos;s Talk About Your Business</h2>
-            <p className="text-sm leading-relaxed max-w-lg mx-auto" style={{ color: 'var(--muted)' }}>
-              Not sure what you need? That&apos;s exactly why you should reach out. I&apos;ll listen to
-              where your business is at and tell you exactly what would help — no pressure, no jargon.
-            </p>
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
+            <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Contact Me</span>
+            <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
           </div>
 
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <h2 className="text-4xl sm:text-5xl font-black mb-5">Let&apos;s Talk About Your Business</h2>
 
-            {/* Left — what we'll cover */}
-            <div className="flex flex-col gap-6 p-8 rounded-2xl border"
-              style={{ borderColor: 'rgba(124,58,237,0.25)', background: 'rgba(124,58,237,0.05)' }}>
-              <div>
-                <p className="text-xs font-semibold tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>What We&apos;ll Cover</p>
-                <h3 className="text-xl font-black mb-2">One conversation is all it takes.</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
-                  Whether you want a full site, AI chat, booking integration, or you&apos;re
-                  just curious about what&apos;s possible — reach out and I&apos;ll walk you through it.
-                  Every project starts with a real conversation, not a form.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                {[
-                  'What your business actually needs online',
-                  'Whether AI chat would make a difference for you',
-                  'How long it takes and what it costs — honestly',
-                  'What separates a TM Design site from the rest',
-                  'How to keep it running and growing after launch',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="flex items-center mt-1 shrink-0">
-                      <div className="w-2 h-2 rounded-full" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9)' }} />
-                      <div className="h-[2px] w-8" style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.8), rgba(168,85,247,0.05))', marginLeft: '-1px' }} />
-                    </div>
-                    <span className="text-sm" style={{ color: 'var(--muted)' }}>{item}</span>
+          <p className="text-sm leading-relaxed mb-10" style={{ color: 'var(--muted)', maxWidth: '480px', margin: '0 auto 2.5rem' }}>
+            Not sure what you need? That is exactly why you should reach out. Whether it is a full site, AI chat, booking, or just questions — I will tell you straight what makes sense for your business. One conversation is all it takes.
+          </p>
+
+          {/* Big phone CTA */}
+          <a href="tel:7253770241"
+            className="inline-flex items-center gap-3 px-12 py-5 font-black text-lg transition-all mb-10"
+            style={{ ...PILL.base, fontSize: '18px' }}
+            onMouseEnter={e => Object.assign(e.currentTarget.style, PILL.hover)}
+            onMouseLeave={e => Object.assign(e.currentTarget.style, PILL.leave)}
+          >
+            <Phone size={22} /> 725-377-0241
+          </a>
+
+          <p className="text-xs mb-5" style={{ color: 'var(--dim)' }}>Or find me on</p>
+
+          {/* Social links — no boxes, just clean row */}
+          <div className="flex items-center justify-center gap-8 mb-16">
+            <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm font-semibold transition-all"
+              style={{ color: 'var(--muted)' }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#c4b5fd' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}>
+              <IconFacebook size={18} /> Facebook
+            </a>
+            <div className="w-px h-4" style={{ background: 'var(--border)' }} />
+            <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm font-semibold transition-all"
+              style={{ color: 'var(--muted)' }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#67e8f9' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}>
+              <IconInstagram size={18} /> @treybm3
+            </a>
+          </div>
+
+          {/* What we will cover */}
+          <div className="text-left max-w-sm mx-auto">
+            <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-4" style={{ color: 'var(--dim)' }}>What we will cover</p>
+            <div className="flex flex-col gap-3">
+              {[
+                'What your business actually needs online',
+                'Whether AI chat would make a difference for you',
+                'How long it takes and what it costs — honestly',
+                'What separates a TM Design site from the rest',
+                'How to keep it running and growing after launch',
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="flex items-center mt-1 shrink-0">
+                    <div className="w-2 h-2 rounded-full" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9)' }} />
+                    <div className="h-[2px] w-6" style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.7), transparent)', marginLeft: '-1px' }} />
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right — contact methods */}
-            <div className="flex flex-col gap-4">
-
-              {/* Best way — call/text */}
-              <div className="relative p-6 rounded-2xl border overflow-hidden"
-                style={{ borderColor: 'rgba(168,85,247,0.45)', background: 'rgba(124,58,237,0.1)', boxShadow: '0 0 40px rgba(124,58,237,0.15)' }}>
-                <div className="absolute top-3 right-3 text-[9px] font-black tracking-[0.2em] uppercase px-2 py-0.5 rounded-full"
-                  style={{ background: 'rgba(168,85,247,0.3)', color: '#c4b5fd', border: '1px solid rgba(168,85,247,0.4)' }}>Best Way</div>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-                    style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))' }}>
-                    <Phone size={15} color="#fff" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm">Call or Text</div>
-                    <div className="text-xs" style={{ color: 'var(--purple-mid)' }}>725-377-0241</div>
-                  </div>
+                  <span className="text-sm" style={{ color: 'var(--muted)' }}>{item}</span>
                 </div>
-                <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
-                  The fastest way to get real answers. Call or text me directly — I respond quickly and I&apos;ll tell you straight up what your business needs.
-                </p>
-                <a href="tel:7253770241"
-                  className="flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm w-full transition-all"
-                  style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', boxShadow: '0 0 20px rgba(124,58,237,0.4)' }}
-                  onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(168,85,247,0.65)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-                  onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 20px rgba(124,58,237,0.4)'; e.currentTarget.style.transform = 'translateY(0)' }}
-                ><Phone size={14} /> 725-377-0241</a>
-              </div>
-
-              {/* Facebook */}
-              <div className="p-5 rounded-2xl border flex items-center gap-4 transition-all"
-                style={{ borderColor: 'rgba(124,58,237,0.2)', background: 'rgba(124,58,237,0.05)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(168,85,247,0.4)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.1)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(124,58,237,0.2)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.05)' }}
-              >
-                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.4)', color: '#c4b5fd' }}>
-                  <IconFacebook size={16} />
-                </div>
-                <div className="flex-1">
-                  <div className="font-bold text-sm mb-0.5">Facebook DM</div>
-                  <p className="text-xs" style={{ color: 'var(--muted)' }}>Good for sharing details, photos of your space, or longer back-and-forth questions.</p>
-                </div>
-                <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
-                  className="text-xs font-bold px-4 py-2 rounded-full shrink-0 transition-all"
-                  style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.4)', color: '#c4b5fd' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.35)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.2)' }}
-                >Message</a>
-              </div>
-
-              {/* Instagram */}
-              <div className="p-5 rounded-2xl border flex items-center gap-4 transition-all"
-                style={{ borderColor: 'rgba(6,182,212,0.15)', background: 'rgba(6,182,212,0.04)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(6,182,212,0.35)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(6,182,212,0.08)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(6,182,212,0.15)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(6,182,212,0.04)' }}
-              >
-                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.35)', color: '#67e8f9' }}>
-                  <IconInstagram size={16} />
-                </div>
-                <div className="flex-1">
-                  <div className="font-bold text-sm mb-0.5">Instagram</div>
-                  <p className="text-xs" style={{ color: 'var(--muted)' }}>See the work and follow along @treybm3. DMs are open — reach out anytime.</p>
-                </div>
-                <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
-                  className="text-xs font-bold px-4 py-2 rounded-full shrink-0 transition-all"
-                  style={{ background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.35)', color: '#67e8f9' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.28)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.15)' }}
-                >Follow</a>
-              </div>
-
+              ))}
             </div>
           </div>
+
         </div>
       </section>
 
@@ -516,10 +456,10 @@ export default function Page() {
       {/* Footer */}
       <footer className="relative z-10 py-6 px-6 border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex flex-col leading-none">
+          <button onClick={scrollTop} className="flex flex-col leading-none text-left hover:opacity-80 transition-opacity">
             <span className="font-black text-sm" style={{ background: 'linear-gradient(90deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>TM Design</span>
             <span className="text-[9px]" style={{ color: 'var(--dim)' }}>Where your thoughts become reality</span>
-          </div>
+          </button>
           <p className="text-xs" style={{ color: 'var(--dim)' }}>Lansing, MI · 2025</p>
         </div>
       </footer>
@@ -537,7 +477,7 @@ function GalaxyCanvas() {
     let raf: number
 
     type Star = { x:number; y:number; r:number; a:number; twinkle:number; speed:number; hue:number }
-    type Shooter = { x:number; y:number; vx:number; vy:number; life:number; maxLife:number; tail:number }
+    type Shooter = { x:number; y:number; vx:number; vy:number; life:number; maxLife:number; tail:number; width:number }
 
     const stars: Star[] = []
     const shooters: Shooter[] = []
@@ -546,17 +486,16 @@ function GalaxyCanvas() {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
       stars.length = 0
-      for (let i = 0; i < 280; i++) {
-        const hueRoll = Math.random()
+      for (let i = 0; i < 320; i++) {
+        const roll = Math.random()
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          r: Math.random() * 1.6 + 0.2,
-          a: Math.random() * 0.7 + 0.15,
+          r: Math.random() * 1.8 + 0.15,
+          a: Math.random() * 0.75 + 0.15,
           twinkle: Math.random() * Math.PI * 2,
-          speed: Math.random() * 0.018 + 0.004,
-          // mostly white, some purple/blue tinted
-          hue: hueRoll < 0.12 ? 270 : hueRoll < 0.22 ? 210 : -1,
+          speed: Math.random() * 0.02 + 0.004,
+          hue: roll < 0.12 ? 270 : roll < 0.22 ? 210 : -1,
         })
       }
     }
@@ -565,58 +504,50 @@ function GalaxyCanvas() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Stars
       for (const s of stars) {
         s.twinkle += s.speed
-        const alpha = s.a * (0.55 + 0.45 * Math.sin(s.twinkle))
+        const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle))
         ctx.beginPath()
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-        if (s.hue === -1) {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`
-        } else if (s.hue === 270) {
-          ctx.fillStyle = `rgba(200,160,255,${alpha})`
-        } else {
-          ctx.fillStyle = `rgba(160,210,255,${alpha})`
-        }
+        ctx.fillStyle = s.hue === 270 ? `rgba(210,170,255,${alpha})` : s.hue === 210 ? `rgba(160,215,255,${alpha})` : `rgba(255,255,255,${alpha})`
         ctx.fill()
       }
 
-      // Spawn shooting stars randomly
-      if (Math.random() < 0.006 && shooters.length < 5) {
-        const angle = (Math.random() * 35 + 18) * Math.PI / 180
-        const spd = Math.random() * 7 + 5
+      // Spawn shooting stars — frequent, from anywhere across top 70%
+      if (Math.random() < 0.022 && shooters.length < 10) {
+        const angle = (Math.random() * 40 + 15) * Math.PI / 180
+        const spd = Math.random() * 9 + 5
         shooters.push({
-          x: Math.random() * canvas.width * 0.75,
-          y: Math.random() * canvas.height * 0.55,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.7,
           vx: spd * Math.cos(angle),
           vy: spd * Math.sin(angle),
           life: 0,
-          maxLife: 45 + Math.random() * 35,
-          tail: 10 + Math.random() * 8,
+          maxLife: 40 + Math.random() * 45,
+          tail: 12 + Math.random() * 14,
+          width: Math.random() * 1.4 + 0.8,
         })
       }
 
-      // Draw shooting stars
       for (let i = shooters.length - 1; i >= 0; i--) {
         const s = shooters[i]
         const alpha = Math.sin((s.life / s.maxLife) * Math.PI)
         const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * s.tail, s.y - s.vy * s.tail)
         grad.addColorStop(0, `rgba(255,255,255,${alpha})`)
-        grad.addColorStop(0.4, `rgba(200,180,255,${alpha * 0.6})`)
+        grad.addColorStop(0.35, `rgba(210,185,255,${alpha * 0.65})`)
         grad.addColorStop(1, 'rgba(255,255,255,0)')
         ctx.beginPath()
         ctx.moveTo(s.x, s.y)
         ctx.lineTo(s.x - s.vx * s.tail, s.y - s.vy * s.tail)
         ctx.strokeStyle = grad
-        ctx.lineWidth = 1.8
+        ctx.lineWidth = s.width
         ctx.stroke()
-        // Head glow
         ctx.beginPath()
-        ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2)
+        ctx.arc(s.x, s.y, s.width, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(255,255,255,${alpha})`
         ctx.fill()
         s.x += s.vx; s.y += s.vy; s.life++
-        if (s.life >= s.maxLife || s.x > canvas.width + 50 || s.y > canvas.height + 50) shooters.splice(i, 1)
+        if (s.life >= s.maxLife || s.x > canvas.width + 80 || s.y > canvas.height + 80) shooters.splice(i, 1)
       }
 
       raf = requestAnimationFrame(draw)
