@@ -231,32 +231,58 @@ export default function Page() {
 
       {/* ══ SKILLS ══ */}
       <section id="skills" className="relative py-24 px-6 z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>What I Offer</p>
-            <h2 className="text-4xl sm:text-5xl font-black">Everything Your<br />Business Needs</h2>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-14 items-start">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {SKILLS.map((s, i) => (
-              <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border transition-all"
-                style={{ borderColor: 'var(--border)', background: 'rgba(17,20,40,0.6)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(124,58,237,0.4)'; (e.currentTarget as HTMLElement).style.background = 'rgba(124,58,237,0.06)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.background = 'rgba(17,20,40,0.6)' }}
-              >
-                <div className="text-xl font-black shrink-0 w-8 text-right leading-none pt-0.5"
-                  style={{ background: 'linear-gradient(135deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  {String(i + 1).padStart(2, '0')}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1.5" style={{ color: 'var(--purple-mid)' }}>
-                    {SkillIcons[s.key]}
-                    <h3 className="font-bold text-sm" style={{ color: 'var(--text)' }}>{s.name}</h3>
-                  </div>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</p>
-                </div>
+            {/* Left — title + desc + CTA */}
+            <div className="lg:w-[280px] shrink-0 flex flex-col gap-6">
+              <div>
+                <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--cyan)' }}>What I Offer</p>
+                <h2 className="text-4xl font-black leading-tight mb-3">What We Do?</h2>
+                {/* Cyan underline accent */}
+                <div style={{ width: '40px', height: '3px', background: 'var(--cyan)', borderRadius: '2px' }} />
               </div>
-            ))}
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                Every service is built around one goal — making your business run smoother,
+                look sharper, and grow faster. Custom tools for real problems.
+              </p>
+              {/* Corner-bracket button */}
+              <a href="#contact" className="relative inline-flex items-center gap-2 px-5 py-3 text-xs font-bold tracking-[0.25em] uppercase transition-all self-start"
+                style={{ color: 'var(--cyan)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#fff' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--cyan)' }}
+              >
+                {/* Corner brackets */}
+                <span className="absolute top-0 left-0 w-3 h-3" style={{ borderTop: '2px solid var(--cyan)', borderLeft: '2px solid var(--cyan)' }} />
+                <span className="absolute top-0 right-0 w-3 h-3" style={{ borderTop: '2px solid var(--cyan)', borderRight: '2px solid var(--cyan)' }} />
+                <span className="absolute bottom-0 left-0 w-3 h-3" style={{ borderBottom: '2px solid var(--cyan)', borderLeft: '2px solid var(--cyan)' }} />
+                <span className="absolute bottom-0 right-0 w-3 h-3" style={{ borderBottom: '2px solid var(--cyan)', borderRight: '2px solid var(--cyan)' }} />
+                Get Started
+              </a>
+            </div>
+
+            {/* Right — 2-col skill grid */}
+            <div className="flex-1 grid grid-cols-2 gap-8">
+              {SKILLS.map((s, i) => (
+                <div key={i} className="flex flex-col gap-3">
+                  {/* Square icon box with corner accents */}
+                  <div className="relative w-14 h-14 flex items-center justify-center"
+                    style={{ color: 'var(--cyan)' }}>
+                    {/* Corner accents */}
+                    <span className="absolute top-0 left-0 w-3 h-3" style={{ borderTop: '1.5px solid var(--cyan)', borderLeft: '1.5px solid var(--cyan)' }} />
+                    <span className="absolute top-0 right-0 w-3 h-3" style={{ borderTop: '1.5px solid var(--cyan)', borderRight: '1.5px solid var(--cyan)' }} />
+                    <span className="absolute bottom-0 left-0 w-3 h-3" style={{ borderBottom: '1.5px solid var(--cyan)', borderLeft: '1.5px solid var(--cyan)' }} />
+                    <span className="absolute bottom-0 right-0 w-3 h-3" style={{ borderBottom: '1.5px solid var(--cyan)', borderRight: '1.5px solid var(--cyan)' }} />
+                    {SkillIcons[s.key]}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm mb-1.5" style={{ color: 'var(--text)' }}>{s.name}</h3>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
