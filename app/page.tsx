@@ -214,18 +214,27 @@ export default function Page() {
                       </div>
                       <a href={w.url} target="_blank" rel="noopener noreferrer"
                         className="relative overflow-hidden rounded-2xl"
-                        style={{ width: '240px', height: '240px', display: 'block', border: `1.5px solid ${w.border}`, background: 'var(--card)', boxShadow: `0 0 30px ${w.color}55` }}
+                        style={{
+                          width: '240px', height: '240px', display: 'block',
+                          border: `1.5px solid ${w.border}`, background: 'var(--card)',
+                          boxShadow: `0 0 30px ${w.color}55`,
+                          padding: '8px',
+                          animation: `site-shake 5s ease-in-out infinite`,
+                          animationDelay: i === 0 ? '1.2s' : '3.8s',
+                        }}
                       >
-                        <iframe src={w.url} title={w.name}
-                          style={{ width: '960px', height: '960px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
-                          loading="lazy"
-                        />
-                        {/* Click Me — green glow, no box */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-sm font-black tracking-[0.25em] uppercase"
-                            style={{ color: '#4ade80', textShadow: '0 0 16px rgba(74,222,128,1), 0 0 32px rgba(74,222,128,0.8), 0 0 60px rgba(74,222,128,0.4)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
-                            Click Me
-                          </span>
+                        <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: '10px' }}>
+                          <iframe src={w.url} title={w.name}
+                            style={{ width: '896px', height: '896px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
+                            loading="lazy"
+                          />
+                          {/* Click Me — green glow, no box */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-sm font-black tracking-[0.25em] uppercase"
+                              style={{ color: '#4ade80', textShadow: '0 0 16px rgba(74,222,128,1), 0 0 32px rgba(74,222,128,0.8), 0 0 60px rgba(74,222,128,0.4)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
+                              Click Me
+                            </span>
+                          </div>
                         </div>
                       </a>
                     </div>
@@ -284,10 +293,10 @@ export default function Page() {
             </div>
 
             {/* Right — 2-col grid */}
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex-1 grid grid-cols-2 gap-4">
               {SKILLS.map((s, i) => (
                 <div key={i}
-                  className="flex flex-col items-start gap-4 p-6 rounded-3xl border"
+                  className="flex flex-col items-start gap-4 p-4 sm:p-6 rounded-3xl border"
                   style={{
                     borderColor: 'rgba(124,58,237,0.22)',
                     background: 'linear-gradient(145deg, rgba(28,16,58,0.7) 0%, rgba(12,8,38,0.6) 100%)',
@@ -399,9 +408,8 @@ export default function Page() {
               <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
                 Not sure what you need? That is exactly why you should reach out. I will tell you straight what makes sense for your business — no upsell, no fluff.
               </p>
-
               <div>
-                <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-5" style={{ color: 'var(--dim)' }}>What we will cover</p>
+                <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-5" style={{ color: 'rgba(240,240,255,0.3)' }}>What we will cover</p>
                 <div className="flex flex-col gap-4">
                   {[
                     'What your business actually needs online',
@@ -412,67 +420,93 @@ export default function Page() {
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <div className="flex items-center mt-[5px] shrink-0">
-                        <div className="w-2 h-2 rounded-full" style={{ background: '#a855f7', boxShadow: '0 0 8px rgba(168,85,247,0.9), 0 0 16px rgba(168,85,247,0.5)' }} />
-                        <div className="h-[2px] w-6" style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.7), transparent)', marginLeft: '-1px' }} />
+                        <div className="w-2 h-2 rounded-full" style={{ background: '#f97316', boxShadow: '0 0 8px rgba(249,115,22,0.9), 0 0 16px rgba(249,115,22,0.5)' }} />
+                        <div className="h-[2px] w-5" style={{ background: 'linear-gradient(to right, rgba(249,115,22,0.6), transparent)', marginLeft: '-1px' }} />
                       </div>
-                      <span className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{item}</span>
+                      <span className="text-sm leading-relaxed font-medium" style={{ color: '#fb923c', textShadow: '0 0 10px rgba(249,115,22,0.3)' }}>{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* Right — purple glowing contact card */}
-            <div className="lg:w-[340px] shrink-0 w-full rounded-3xl p-8 flex flex-col gap-7 relative overflow-hidden"
+            {/* Right — featured contact card (inspired by Another Planet's logo+stats card) */}
+            <div className="lg:w-[360px] shrink-0 w-full rounded-3xl overflow-hidden"
               style={{
-                background: 'linear-gradient(145deg, rgba(109,40,217,0.18) 0%, rgba(28,16,58,0.55) 100%)',
-                border: '1px solid rgba(124,58,237,0.5)',
-                boxShadow: '0 0 60px rgba(124,58,237,0.35), 0 0 120px rgba(124,58,237,0.12), inset 0 1px 0 rgba(255,255,255,0.06)',
-                backdropFilter: 'blur(18px)',
+                border: '1px solid rgba(124,58,237,0.55)',
+                boxShadow: '0 0 70px rgba(124,58,237,0.45), 0 0 140px rgba(124,58,237,0.18)',
+                background: 'linear-gradient(160deg, rgba(109,40,217,0.22) 0%, rgba(10,6,32,0.8) 100%)',
+                backdropFilter: 'blur(20px)',
               }}>
-              {/* Ambient glow inside card */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                style={{ width: '200px', height: '120px', background: 'radial-gradient(ellipse, rgba(168,85,247,0.3) 0%, transparent 70%)', filter: 'blur(20px)' }} />
 
-              <div className="relative z-10">
-                <p className="text-xs tracking-[0.3em] uppercase font-semibold mb-2" style={{ color: 'rgba(168,85,247,0.7)' }}>Call or Text</p>
-                <a href="tel:7253770241"
-                  className="block font-black transition-all leading-none"
-                  style={{ fontSize: '32px', color: '#f97316', textShadow: '0 0 20px rgba(249,115,22,0.7), 0 0 40px rgba(249,115,22,0.35)', letterSpacing: '-0.01em' }}
-                  onMouseEnter={e => { e.currentTarget.style.textShadow = '0 0 28px rgba(249,115,22,0.95), 0 0 56px rgba(249,115,22,0.5)' }}
-                  onMouseLeave={e => { e.currentTarget.style.textShadow = '0 0 20px rgba(249,115,22,0.7), 0 0 40px rgba(249,115,22,0.35)' }}
+              {/* Top: TM monogram + brand name */}
+              <div className="relative flex flex-col items-center gap-3 px-8 py-8 overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 0%, rgba(168,85,247,0.28) 0%, transparent 70%)' }} />
+                <div className="relative z-10 w-16 h-16 rounded-full flex items-center justify-center font-black text-lg"
+                  style={{ background: 'linear-gradient(135deg, rgba(109,40,217,0.9), rgba(168,85,247,0.6))', border: '1.5px solid rgba(168,85,247,0.65)', boxShadow: '0 0 32px rgba(124,58,237,0.8), 0 0 64px rgba(124,58,237,0.35)', color: '#fff' }}>
+                  TM
+                </div>
+                <p className="relative z-10 text-xs tracking-[0.38em] uppercase font-bold" style={{ color: 'rgba(168,85,247,0.9)' }}>TM Design</p>
+              </div>
+
+              <div className="h-px w-full" style={{ background: 'rgba(124,58,237,0.35)' }} />
+
+              {/* Phone number */}
+              <div className="px-8 py-6 text-center">
+                <p className="text-[10px] tracking-[0.3em] uppercase font-semibold mb-2" style={{ color: 'rgba(240,240,255,0.3)' }}>Call or Text</p>
+                <a href="tel:7253770241" className="block font-black transition-all leading-none"
+                  style={{ fontSize: '30px', letterSpacing: '-0.01em', color: '#f97316', textShadow: '0 0 24px rgba(249,115,22,0.85), 0 0 50px rgba(249,115,22,0.4)' }}
+                  onMouseEnter={e => { e.currentTarget.style.textShadow = '0 0 32px rgba(249,115,22,1), 0 0 70px rgba(249,115,22,0.65)' }}
+                  onMouseLeave={e => { e.currentTarget.style.textShadow = '0 0 24px rgba(249,115,22,0.85), 0 0 50px rgba(249,115,22,0.4)' }}
                 >725-377-0241</a>
-                <p className="text-xs mt-1.5" style={{ color: 'rgba(240,240,255,0.35)' }}>Lansing, MI · Available daily</p>
+                <p className="text-xs mt-2" style={{ color: 'rgba(240,240,255,0.28)' }}>Lansing, MI — Available daily</p>
               </div>
 
-              <div className="h-px w-full relative z-10" style={{ background: 'rgba(124,58,237,0.3)' }} />
+              <div className="h-px w-full" style={{ background: 'rgba(124,58,237,0.25)' }} />
 
-              <div className="relative z-10 flex flex-col gap-3">
-                <p className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: 'rgba(168,85,247,0.7)' }}>Find Me On</p>
-                <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all"
-                  style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.25)', color: 'rgba(200,190,255,0.8)' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.22)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.5)'; e.currentTarget.style.color = '#c4b5fd' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.1)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.25)'; e.currentTarget.style.color = 'rgba(200,190,255,0.8)' }}>
-                  <IconFacebook size={16} />
-                  <span className="text-sm font-semibold">Facebook</span>
-                </a>
-                <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all"
-                  style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', color: 'rgba(103,232,249,0.8)' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.18)'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.45)'; e.currentTarget.style.color = '#67e8f9' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.08)'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.2)'; e.currentTarget.style.color = 'rgba(103,232,249,0.8)' }}>
-                  <IconInstagram size={16} />
-                  <span className="text-sm font-semibold">@treybm3</span>
-                </a>
+              {/* Stats row — like Another Planet's 600+ / 2000+ / #1 */}
+              <div className="grid grid-cols-3">
+                {[
+                  { value: '2 wk', label: 'Avg Launch' },
+                  { value: '24/7', label: 'AI Always On' },
+                  { value: '100%', label: 'Custom Built' },
+                ].map((s, i) => (
+                  <div key={i} className={`flex flex-col items-center gap-1.5 py-5 ${i < 2 ? 'border-r' : ''}`}
+                    style={{ borderColor: 'rgba(124,58,237,0.25)' }}>
+                    <span className="text-xl font-black" style={{ color: '#f97316', textShadow: '0 0 18px rgba(249,115,22,0.8)' }}>{s.value}</span>
+                    <span className="text-[9px] tracking-[0.12em] uppercase text-center leading-tight px-1" style={{ color: 'rgba(240,240,255,0.3)' }}>{s.label}</span>
+                  </div>
+                ))}
               </div>
 
-              <a href="tel:7253770241"
-                className="relative z-10 flex items-center justify-center gap-2 w-full py-4 font-black text-sm transition-all"
-                style={{ ...pillBase }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.75)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
-              ><Phone size={16} /> Contact Trey</a>
+              <div className="h-px w-full" style={{ background: 'rgba(124,58,237,0.25)' }} />
+
+              {/* Social links + CTA */}
+              <div className="px-8 py-6 flex flex-col gap-3">
+                <div className="flex gap-3">
+                  <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-2xl transition-all text-sm font-semibold"
+                    style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.28)', color: 'rgba(200,190,255,0.75)' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.22)'; e.currentTarget.style.color = '#c4b5fd'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.5)' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.1)'; e.currentTarget.style.color = 'rgba(200,190,255,0.75)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.28)' }}>
+                    <IconFacebook size={14} /> Facebook
+                  </a>
+                  <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-2xl transition-all text-sm font-semibold"
+                    style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.22)', color: 'rgba(103,232,249,0.75)' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.18)'; e.currentTarget.style.color = '#67e8f9'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.45)' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,182,212,0.08)'; e.currentTarget.style.color = 'rgba(103,232,249,0.75)'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.22)' }}>
+                    <IconInstagram size={14} /> @treybm3
+                  </a>
+                </div>
+                <a href="tel:7253770241"
+                  className="flex items-center justify-center gap-2 w-full py-4 font-black text-sm transition-all"
+                  style={{ ...pillBase }}
+                  onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.75)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                  onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
+                ><Phone size={16} /> Contact Trey</a>
+              </div>
             </div>
 
           </div>
