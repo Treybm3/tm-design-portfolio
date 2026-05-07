@@ -235,10 +235,10 @@ export default function Page() {
           <div className="flex flex-col lg:flex-row gap-14 items-start">
 
             {/* Left — title + desc + CTA */}
-            <div className="lg:w-[280px] shrink-0 flex flex-col gap-6">
-              <div>
-                <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--cyan)' }}>What I Offer</p>
-                <h2 className="text-4xl font-black leading-tight mb-3">What We Do?</h2>
+            <div className="lg:w-[320px] shrink-0 flex flex-col gap-8">
+              <div className="flex flex-col gap-4">
+                <p className="text-xs font-semibold tracking-[0.4em] uppercase" style={{ color: 'var(--cyan)' }}>What I Offer</p>
+                <h2 className="text-4xl font-black leading-tight">What We Do?</h2>
                 {/* Cyan underline accent */}
                 <div style={{ width: '40px', height: '3px', background: 'var(--cyan)', borderRadius: '2px' }} />
               </div>
