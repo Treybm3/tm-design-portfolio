@@ -48,7 +48,7 @@ export default function Page() {
   const [photoIdx, setPhotoIdx] = useState(0)
   const [photoVis, setPhotoVis] = useState(true)
 
-  // Two-line typing: "TM Design" pause then "Where your thoughts become reality"
+  // Two-line typing loop: type LINE1, pause, type LINE2, pause, reset, repeat
   useEffect(() => {
     if (phase === 0) {
       let i = 0
@@ -63,6 +63,10 @@ export default function Page() {
       let i = 0
       const id = setInterval(() => { i++; setLine2(LINE2.slice(0, i)); if (i >= LINE2.length) { clearInterval(id); setPhase(3) } }, 48)
       return () => clearInterval(id)
+    }
+    if (phase === 3) {
+      const id = setTimeout(() => { setLine1(''); setLine2(''); setPhase(0) }, 2800)
+      return () => clearTimeout(id)
     }
   }, [phase])
 
@@ -86,7 +90,7 @@ export default function Page() {
 
       {/* Fixed particles */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <ParticleCanvas />
+        <GalaxyCanvas />
       </div>
 
       {/* ── Navbar ── */}
@@ -189,7 +193,7 @@ export default function Page() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>Portfolio</p>
-            <h2 className="text-4xl sm:text-5xl font-black">Live Sites I Built</h2>
+            <h2 className="text-4xl sm:text-5xl font-black">Sites I've Made for Clients</h2>
           </div>
 
           {/* Cards LEFT + Description RIGHT */}
@@ -212,11 +216,10 @@ export default function Page() {
                           style={{ width: '800px', height: '800px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
                           loading="lazy"
                         />
-                        {/* Always-pulsing Click Me */}
-                        <div className="absolute inset-x-0 bottom-0 flex items-center justify-center pb-3"
-                          style={{ background: 'linear-gradient(to top, rgba(5,6,15,0.85) 0%, transparent 70%)' }}>
-                          <span className="text-[10px] font-black tracking-[0.25em] uppercase"
-                            style={{ color: 'var(--purple-mid)', textShadow: '0 0 14px rgba(168,85,247,1), 0 0 30px rgba(168,85,247,0.6)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
+                        {/* Centered Click Me badge */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-[9px] font-black tracking-[0.2em] uppercase px-2.5 py-1 rounded-full"
+                            style={{ background: '#fbbf24', color: '#000', boxShadow: '0 0 16px rgba(251,191,36,0.95), 0 0 32px rgba(251,191,36,0.5)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
                             Click Me
                           </span>
                         </div>
@@ -285,17 +288,17 @@ export default function Page() {
           {/* Symmetric 3-col grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {SKILLS.map((s, i) => (
-              <div key={i} className="flex flex-col gap-4 p-6 rounded-2xl border transition-all"
+              <div key={i} className="flex flex-col gap-3 p-6 rounded-2xl border transition-all"
                 style={{ borderColor: 'rgba(124,58,237,0.2)', background: 'rgba(124,58,237,0.05)' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(168,85,247,0.5)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.1)' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(124,58,237,0.2)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(124,58,237,0.05)' }}
               >
-                <div className="relative w-12 h-12 flex items-center justify-center" style={{ color: 'var(--purple-mid)' }}>
-                  <span className="absolute top-0 left-0 w-3 h-3" style={{ borderTop: '1.5px solid var(--purple-mid)', borderLeft: '1.5px solid var(--purple-mid)' }} />
-                  <span className="absolute top-0 right-0 w-3 h-3" style={{ borderTop: '1.5px solid var(--purple-mid)', borderRight: '1.5px solid var(--purple-mid)' }} />
-                  <span className="absolute bottom-0 left-0 w-3 h-3" style={{ borderBottom: '1.5px solid var(--purple-mid)', borderLeft: '1.5px solid var(--purple-mid)' }} />
-                  <span className="absolute bottom-0 right-0 w-3 h-3" style={{ borderBottom: '1.5px solid var(--purple-mid)', borderRight: '1.5px solid var(--purple-mid)' }} />
-                  {SkillIcons[s.key]}
+                {/* Glowing bullet-dash */}
+                <div className="flex items-center">
+                  <div className="w-3 h-3 rounded-full shrink-0"
+                    style={{ background: '#a855f7', boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.6)' }} />
+                  <div className="h-[3px] w-14 -ml-px"
+                    style={{ background: 'linear-gradient(to right, rgba(168,85,247,0.9) 0%, rgba(168,85,247,0.1) 100%)', borderRadius: '0 2px 2px 0' }} />
                 </div>
                 <div>
                   <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--text)' }}>{s.name}</h3>
@@ -435,33 +438,101 @@ export default function Page() {
   )
 }
 
-// ── Particle Canvas ────────────────────────────────────────────────────────────
-function ParticleCanvas() {
+// ── Galaxy Canvas ─────────────────────────────────────────────────────────────
+function GalaxyCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
     const canvas = canvasRef.current; if (!canvas) return
     const ctx = canvas.getContext('2d'); if (!ctx) return
     let raf: number
-    const pts: { x:number; y:number; vx:number; vy:number; r:number; a:number }[] = []
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
+
+    type Star = { x:number; y:number; r:number; a:number; twinkle:number; speed:number; hue:number }
+    type Shooter = { x:number; y:number; vx:number; vy:number; life:number; maxLife:number; tail:number }
+
+    const stars: Star[] = []
+    const shooters: Shooter[] = []
+
+    const resize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+      stars.length = 0
+      for (let i = 0; i < 280; i++) {
+        const hueRoll = Math.random()
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.2,
+          a: Math.random() * 0.7 + 0.15,
+          twinkle: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.018 + 0.004,
+          // mostly white, some purple/blue tinted
+          hue: hueRoll < 0.12 ? 270 : hueRoll < 0.22 ? 210 : -1,
+        })
+      }
+    }
     resize(); window.addEventListener('resize', resize)
-    for (let i = 0; i < 110; i++) pts.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: (Math.random()-.5)*.28, vy: (Math.random()-.5)*.28, r: Math.random()*1.4+.4, a: Math.random()*.6+.2 })
+
     const draw = () => {
-      ctx.clearRect(0,0,canvas.width,canvas.height)
-      for (const p of pts) {
-        p.x+=p.vx; p.y+=p.vy
-        if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0
-        if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(168,85,247,${p.a})`; ctx.fill()
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // Stars
+      for (const s of stars) {
+        s.twinkle += s.speed
+        const alpha = s.a * (0.55 + 0.45 * Math.sin(s.twinkle))
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
+        if (s.hue === -1) {
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`
+        } else if (s.hue === 270) {
+          ctx.fillStyle = `rgba(200,160,255,${alpha})`
+        } else {
+          ctx.fillStyle = `rgba(160,210,255,${alpha})`
+        }
+        ctx.fill()
       }
-      for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
-        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy)
-        if(d<115){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(124,58,237,${.28*(1-d/115)})`;ctx.lineWidth=.7;ctx.stroke()}
+
+      // Spawn shooting stars randomly
+      if (Math.random() < 0.006 && shooters.length < 5) {
+        const angle = (Math.random() * 35 + 18) * Math.PI / 180
+        const spd = Math.random() * 7 + 5
+        shooters.push({
+          x: Math.random() * canvas.width * 0.75,
+          y: Math.random() * canvas.height * 0.55,
+          vx: spd * Math.cos(angle),
+          vy: spd * Math.sin(angle),
+          life: 0,
+          maxLife: 45 + Math.random() * 35,
+          tail: 10 + Math.random() * 8,
+        })
       }
-      raf=requestAnimationFrame(draw)
+
+      // Draw shooting stars
+      for (let i = shooters.length - 1; i >= 0; i--) {
+        const s = shooters[i]
+        const alpha = Math.sin((s.life / s.maxLife) * Math.PI)
+        const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * s.tail, s.y - s.vy * s.tail)
+        grad.addColorStop(0, `rgba(255,255,255,${alpha})`)
+        grad.addColorStop(0.4, `rgba(200,180,255,${alpha * 0.6})`)
+        grad.addColorStop(1, 'rgba(255,255,255,0)')
+        ctx.beginPath()
+        ctx.moveTo(s.x, s.y)
+        ctx.lineTo(s.x - s.vx * s.tail, s.y - s.vy * s.tail)
+        ctx.strokeStyle = grad
+        ctx.lineWidth = 1.8
+        ctx.stroke()
+        // Head glow
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`
+        ctx.fill()
+        s.x += s.vx; s.y += s.vy; s.life++
+        if (s.life >= s.maxLife || s.x > canvas.width + 50 || s.y > canvas.height + 50) shooters.splice(i, 1)
+      }
+
+      raf = requestAnimationFrame(draw)
     }
     draw()
-    return ()=>{cancelAnimationFrame(raf);window.removeEventListener('resize',resize)}
-  },[])
-  return <canvas ref={canvasRef} style={{width:'100%',height:'100%'}} />
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize) }
+  }, [])
+  return <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
 }
