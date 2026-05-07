@@ -187,12 +187,9 @@ export default function Page() {
       {/* ══ WORK ══ */}
       <section id="work" className="relative py-24 px-6 z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
-              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>Portfolio</span>
-              <div className="h-px w-10" style={{ background: 'var(--purple-mid)' }} />
-            </div>
+          <div className="flex items-center justify-center gap-4 flex-wrap mb-14">
+            <span className="text-xs tracking-[0.35em] uppercase font-bold px-3 py-1.5 rounded-full"
+              style={{ color: 'var(--purple-mid)', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.35)' }}>Portfolio</span>
             <h2 className="text-4xl sm:text-5xl font-black">Sites I&apos;ve Built for People</h2>
           </div>
 
@@ -290,7 +287,7 @@ export default function Page() {
             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {SKILLS.map((s, i) => (
                 <div key={i}
-                  className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl border"
+                  className="flex flex-col items-start gap-4 p-6 rounded-3xl border"
                   style={{
                     borderColor: 'rgba(124,58,237,0.22)',
                     background: 'linear-gradient(145deg, rgba(28,16,58,0.7) 0%, rgba(12,8,38,0.6) 100%)',
@@ -301,33 +298,29 @@ export default function Page() {
                   onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(168,85,247,0.5)'; el.style.boxShadow = '0 8px 36px rgba(124,58,237,0.22)'; el.style.transform = 'translateY(-3px)' }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(124,58,237,0.22)'; el.style.boxShadow = '0 6px 28px rgba(0,0,0,0.25)'; el.style.transform = 'translateY(0)' }}
                 >
-                  {/* 100% progress ring around orb */}
-                  <div className="relative w-14 h-14 flex items-center justify-center">
-                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 56 56" style={{ overflow: 'visible' }}>
-                      <defs>
-                        <linearGradient id={`pg-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#a855f7" />
-                          <stop offset="100%" stopColor="#06b6d4" />
-                        </linearGradient>
-                      </defs>
-                      {/* Track */}
-                      <circle cx="28" cy="28" r="24" fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.18)" strokeWidth="1.5" />
-                      {/* Full ring */}
-                      <circle cx="28" cy="28" r="24" fill="none"
-                        stroke={`url(#pg-${i})`} strokeWidth="2.5"
-                        strokeDasharray="150.8" strokeDashoffset="0"
-                        strokeLinecap="round"
-                        transform="rotate(-90 28 28)"
-                        style={{ filter: 'drop-shadow(0 0 5px rgba(168,85,247,0.85)) drop-shadow(0 0 10px rgba(168,85,247,0.45))' }}
-                      />
-                    </svg>
-                    <div className="w-3.5 h-3.5 rounded-full relative z-10"
-                      style={{ background: 'radial-gradient(circle, #e9d5ff 0%, #a855f7 50%, #7c3aed 100%)', boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.75), 0 0 40px rgba(168,85,247,0.4)' }} />
+                  {/* Skill name row + star rating */}
+                  <div className="flex items-center justify-between w-full gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full shrink-0"
+                        style={{ background: 'radial-gradient(circle, #e9d5ff, #a855f7)', boxShadow: '0 0 8px rgba(168,85,247,1), 0 0 16px rgba(168,85,247,0.5)' }} />
+                      <h3 className="font-black text-sm" style={{ color: 'var(--text)' }}>{s.name}</h3>
+                    </div>
+                    <span className="text-xs font-black shrink-0" style={{ color: '#a855f7', textShadow: '0 0 8px rgba(168,85,247,0.8)', letterSpacing: '1px' }}>★★★★★</span>
                   </div>
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="font-black text-sm" style={{ color: 'var(--text)' }}>{s.name}</h3>
-                    <p className="text-xs leading-relaxed" style={{ color: 'rgba(200,195,230,0.62)' }}>{s.desc}</p>
+                  {/* Game stat bar — maxed out */}
+                  <div className="w-full">
+                    <div className="h-[6px] rounded-full w-full mb-1" style={{ background: 'rgba(124,58,237,0.15)' }}>
+                      <div className="h-full rounded-full" style={{
+                        width: '100%',
+                        background: 'linear-gradient(to right, #7c3aed 0%, #a855f7 55%, #06b6d4 100%)',
+                        boxShadow: '0 0 8px rgba(168,85,247,0.9), 0 0 18px rgba(168,85,247,0.45)',
+                      }} />
+                    </div>
+                    <div className="flex justify-end">
+                      <span className="text-[10px] font-black" style={{ color: 'rgba(168,85,247,0.7)', letterSpacing: '0.05em' }}>100%</span>
+                    </div>
                   </div>
+                  <p className="text-xs leading-relaxed w-full" style={{ color: 'rgba(200,195,230,0.62)' }}>{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -338,12 +331,9 @@ export default function Page() {
       {/* ══ ABOUT ══ */}
       <section id="about" className="relative py-24 px-6 z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
-              <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>About</span>
-              <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
-            </div>
+          <div className="flex items-center justify-center gap-4 flex-wrap mb-14">
+            <span className="text-xs tracking-[0.35em] uppercase font-bold px-3 py-1.5 rounded-full"
+              style={{ color: 'var(--purple-mid)', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.35)' }}>About</span>
             <h2 className="text-4xl sm:text-5xl font-black">About Trey</h2>
           </div>
 
