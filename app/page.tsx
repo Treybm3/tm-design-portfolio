@@ -118,71 +118,104 @@ export default function Page() {
       </nav>
 
       {/* ══ HERO ══ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
+      <section className="relative min-h-screen flex flex-col overflow-hidden z-10">
+        {/* Background gradients */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 35%, rgba(109,40,217,0.35) 0%, rgba(76,29,149,0.12) 55%, transparent 75%)' }} />
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 40% at 80% 10%, rgba(124,58,237,0.18) 0%, transparent 60%)' }} />
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 40% 35% at 10% 85%, rgba(6,182,212,0.1) 0%, transparent 65%)' }} />
 
-        <div className="relative text-center max-w-3xl mx-auto px-6 pt-28 pb-24 flex flex-col items-center gap-7">
-          <div className="text-xs font-semibold tracking-[0.4em] uppercase px-4 py-1.5 rounded-full border"
-            style={{ borderColor: 'rgba(124,58,237,0.45)', color: 'var(--muted)', background: 'rgba(124,58,237,0.1)' }}>
-            Web &amp; AI Solutions for Local Business
+        {/* Trey photo — centered, large, fades at edges */}
+        <div className="absolute inset-0 flex items-end justify-center pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+          <div style={{
+            position: 'relative',
+            height: '88%',
+            width: 'clamp(280px, 52vw, 520px)',
+            maskImage: 'radial-gradient(ellipse 80% 100% at 52% 38%, black 22%, transparent 72%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 100% at 52% 38%, black 22%, transparent 72%)',
+          }}>
+            <img src="/aboutme.jpg" alt=""
+              className="w-full h-full"
+              style={{ objectFit: 'cover', objectPosition: '68% top', opacity: 0.62 }}
+            />
           </div>
+        </div>
 
-          <div className="flex flex-col items-center gap-3">
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
-              style={{ background: 'linear-gradient(135deg, var(--purple-mid) 0%, var(--cyan) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              {line1}
-              {phase <= 1 && <span className="inline-block w-[3px] align-middle ml-1 rounded" style={{ height: '0.85em', background: 'var(--cyan)', animation: 'type-cursor 1s step-end infinite' }} />}
-            </h1>
-            <div className="text-xl sm:text-2xl font-semibold min-h-[2rem]" style={{ color: 'rgba(200,190,255,0.85)', letterSpacing: '0.01em' }}>
-              {line2}
-              {phase === 2 && <span className="inline-block w-[2px] align-middle ml-0.5 rounded" style={{ height: '0.8em', background: 'rgba(200,190,255,0.85)', animation: 'type-cursor 1s step-end infinite' }} />}
+        {/* Top gradient for text readability */}
+        <div className="absolute inset-x-0 top-0 pointer-events-none" style={{ zIndex: 2, height: '38%', background: 'linear-gradient(to bottom, var(--bg) 0%, rgba(5,6,15,0.75) 55%, transparent 100%)' }} />
+        {/* Bottom gradient for text readability */}
+        <div className="absolute inset-x-0 bottom-0 pointer-events-none" style={{ zIndex: 2, height: '40%', background: 'linear-gradient(to top, var(--bg) 0%, rgba(5,6,15,0.8) 50%, transparent 100%)' }} />
+
+        {/* Text content — fills full height, splits top/bottom */}
+        <div className="relative flex flex-col min-h-screen px-6 pt-28 pb-8" style={{ zIndex: 3 }}>
+
+          {/* Top: badge + typing */}
+          <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto w-full">
+            <div className="text-xs font-semibold tracking-[0.4em] uppercase px-4 py-1.5 rounded-full border"
+              style={{ borderColor: 'rgba(124,58,237,0.45)', color: 'var(--muted)', background: 'rgba(124,58,237,0.1)' }}>
+              Web &amp; AI Solutions for Local Business
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
+                style={{ background: 'linear-gradient(135deg, var(--purple-mid) 0%, var(--cyan) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                {line1}
+                {phase <= 1 && <span className="inline-block w-[3px] align-middle ml-1 rounded" style={{ height: '0.85em', background: 'var(--cyan)', animation: 'type-cursor 1s step-end infinite' }} />}
+              </h1>
+              <div className="text-xl sm:text-2xl font-semibold min-h-[2rem]" style={{ color: 'rgba(200,190,255,0.85)', letterSpacing: '0.01em' }}>
+                {line2}
+                {phase === 2 && <span className="inline-block w-[2px] align-middle ml-0.5 rounded" style={{ height: '0.8em', background: 'rgba(200,190,255,0.85)', animation: 'type-cursor 1s step-end infinite' }} />}
+              </div>
             </div>
           </div>
 
-          <p className="text-lg sm:text-xl font-light leading-relaxed" style={{ color: 'rgba(220,215,255,0.75)', maxWidth: '480px' }}>
-            Custom websites and AI-powered tools for local businesses in Lansing, MI.
-            Fast. Sharp. Built to convert.
-          </p>
+          {/* Flex spacer — photo lives in this gap */}
+          <div className="flex-1" />
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="#work"
-              className="flex items-center justify-center gap-2 px-10 py-4 font-black text-sm tracking-wide transition-all"
-              style={{ ...pillBase }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.7)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
-            >See My Work <ChevronRight size={15} /></a>
-            <a href="#contact"
-              className="flex items-center justify-center gap-2 px-10 py-4 font-bold text-sm transition-all"
-              style={{ borderRadius: '100px', border: '1px solid rgba(124,58,237,0.5)', color: 'rgba(220,215,255,0.85)', background: 'rgba(124,58,237,0.08)' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; e.currentTarget.style.background = 'rgba(124,58,237,0.2)'; e.currentTarget.style.color = '#fff' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)'; e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.color = 'rgba(220,215,255,0.85)' }}
-            >Get in Touch</a>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <a href="tel:7253770241"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold transition-all"
-              style={{ background: 'rgba(124,58,237,0.18)', border: '1px solid rgba(124,58,237,0.4)', color: 'rgba(220,215,255,0.85)', boxShadow: '0 0 14px rgba(124,58,237,0.28)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(124,58,237,0.55)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 14px rgba(124,58,237,0.28)' }}
-            ><Phone size={13} /> 725-377-0241</a>
-            <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
-              style={{ background: 'rgba(124,58,237,0.22)', border: '1px solid rgba(124,58,237,0.5)', color: '#c4b5fd', boxShadow: '0 0 18px rgba(124,58,237,0.38)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(124,58,237,0.7)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(124,58,237,0.38)' }}
-              aria-label="Facebook"><IconFacebook size={16} /></a>
-            <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
-              style={{ background: 'rgba(6,182,212,0.18)', border: '1px solid rgba(6,182,212,0.45)', color: '#67e8f9', boxShadow: '0 0 18px rgba(6,182,212,0.32)' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(6,182,212,0.65)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(6,182,212,0.32)' }}
-              aria-label="Instagram"><IconInstagram size={16} /></a>
+          {/* Bottom: description + buttons + contact */}
+          <div className="flex flex-col items-center gap-5 text-center max-w-xl mx-auto w-full pb-12">
+            <p className="text-base sm:text-lg font-light leading-relaxed" style={{ color: 'rgba(220,215,255,0.75)' }}>
+              Custom websites and AI-powered tools for local businesses in Lansing, MI.
+              Fast. Sharp. Built to convert.
+            </p>
+            <div className="flex flex-row gap-3 justify-center">
+              <a href="#work"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 font-black text-sm tracking-wide transition-all whitespace-nowrap"
+                style={{ ...pillBase }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 44px rgba(168,85,247,0.7)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'translateY(0)' }}
+              >See My Work <ChevronRight size={15} /></a>
+              <a href="#contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 font-bold text-sm transition-all whitespace-nowrap"
+                style={{ borderRadius: '100px', border: '1px solid rgba(124,58,237,0.5)', color: 'rgba(220,215,255,0.85)', background: 'rgba(124,58,237,0.08)' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; e.currentTarget.style.background = 'rgba(124,58,237,0.2)'; e.currentTarget.style.color = '#fff' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)'; e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.color = 'rgba(220,215,255,0.85)' }}
+              >Get in Touch</a>
+            </div>
+            <div className="flex items-center gap-3">
+              <a href="tel:7253770241"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap"
+                style={{ background: 'rgba(124,58,237,0.18)', border: '1px solid rgba(124,58,237,0.4)', color: 'rgba(220,215,255,0.85)', boxShadow: '0 0 14px rgba(124,58,237,0.28)' }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(124,58,237,0.55)' }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 14px rgba(124,58,237,0.28)' }}
+              ><Phone size={13} /> 725-377-0241</a>
+              <a href="https://www.facebook.com/linton.macklin.3" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                style={{ background: 'rgba(124,58,237,0.22)', border: '1px solid rgba(124,58,237,0.5)', color: '#c4b5fd', boxShadow: '0 0 18px rgba(124,58,237,0.38)' }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(124,58,237,0.7)' }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(124,58,237,0.38)' }}
+                aria-label="Facebook"><IconFacebook size={16} /></a>
+              <a href="https://www.instagram.com/treybm3/" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                style={{ background: 'rgba(6,182,212,0.18)', border: '1px solid rgba(6,182,212,0.45)', color: '#67e8f9', boxShadow: '0 0 18px rgba(6,182,212,0.32)' }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 30px rgba(6,182,212,0.65)' }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(6,182,212,0.32)' }}
+                aria-label="Instagram"><IconInstagram size={16} /></a>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* ══ SKILLS MARQUEE ══ */}
+      <SkillsMarquee />
 
       {/* ══ WORK ══ */}
       <section id="work" className="relative py-24 px-6 z-10">
@@ -540,6 +573,42 @@ export default function Page() {
       </div>
 
     </main>
+  )
+}
+
+// ── Skills Marquee ────────────────────────────────────────────────────────────
+const MARQUEE_ITEMS = [
+  'Custom Websites', 'AI Chat', 'SEO Optimization', 'Analytics Dashboard',
+  'Booking Integration', 'Live Instagram Feed', 'Social Media Marketing', 'Photography',
+  'Mobile-First Design', 'Web Automation', 'UI/UX Design', '24/7 AI Support',
+]
+
+function SkillsMarquee() {
+  const doubled = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
+  return (
+    <div className="relative overflow-hidden py-4 z-10"
+      style={{ background: 'rgba(5,6,15,0.5)', borderTop: '1px solid rgba(124,58,237,0.22)', borderBottom: '1px solid rgba(124,58,237,0.22)', backdropFilter: 'blur(12px)' }}>
+      {/* Row 1 — scrolls left */}
+      <div className="flex mb-3" style={{ width: 'max-content', animation: 'marquee-left 26s linear infinite' }}>
+        {doubled.map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-3 px-5 text-sm font-bold whitespace-nowrap"
+            style={{ color: 'rgba(200,190,255,0.78)' }}>
+            {item}
+            <span style={{ color: 'rgba(168,85,247,0.65)', fontSize: '8px' }}>✦</span>
+          </span>
+        ))}
+      </div>
+      {/* Row 2 — scrolls right */}
+      <div className="flex" style={{ width: 'max-content', animation: 'marquee-right 32s linear infinite' }}>
+        {doubled.map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-3 px-5 text-sm font-bold whitespace-nowrap"
+            style={{ color: 'rgba(103,232,249,0.65)' }}>
+            {item}
+            <span style={{ color: 'rgba(6,182,212,0.5)', fontSize: '8px' }}>✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
   )
 }
 
