@@ -278,11 +278,7 @@ export default function Page() {
             {/* Left — description */}
             <div className="lg:w-[300px] shrink-0 lg:sticky lg:top-24 flex flex-col gap-6">
               <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-px w-8" style={{ background: 'var(--purple-mid)' }} />
-                  <span className="text-xs tracking-[0.35em] uppercase font-semibold" style={{ color: 'var(--purple-mid)' }}>My Skills</span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-black leading-tight">What I Bring to the Table</h2>
+                <h2 className="text-3xl sm:text-4xl font-black leading-tight">My Skillset</h2>
                 <div style={{ width: '36px', height: '3px', background: 'linear-gradient(to right, var(--purple-mid), var(--cyan))', borderRadius: '2px' }} />
               </div>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
@@ -305,9 +301,27 @@ export default function Page() {
                   onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(168,85,247,0.5)'; el.style.boxShadow = '0 8px 36px rgba(124,58,237,0.22)'; el.style.transform = 'translateY(-3px)' }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(124,58,237,0.22)'; el.style.boxShadow = '0 6px 28px rgba(0,0,0,0.25)'; el.style.transform = 'translateY(0)' }}
                 >
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center"
-                    style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(168,85,247,0.28)' }}>
-                    <div className="w-3.5 h-3.5 rounded-full"
+                  {/* 100% progress ring around orb */}
+                  <div className="relative w-14 h-14 flex items-center justify-center">
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 56 56" style={{ overflow: 'visible' }}>
+                      <defs>
+                        <linearGradient id={`pg-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#a855f7" />
+                          <stop offset="100%" stopColor="#06b6d4" />
+                        </linearGradient>
+                      </defs>
+                      {/* Track */}
+                      <circle cx="28" cy="28" r="24" fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.18)" strokeWidth="1.5" />
+                      {/* Full ring */}
+                      <circle cx="28" cy="28" r="24" fill="none"
+                        stroke={`url(#pg-${i})`} strokeWidth="2.5"
+                        strokeDasharray="150.8" strokeDashoffset="0"
+                        strokeLinecap="round"
+                        transform="rotate(-90 28 28)"
+                        style={{ filter: 'drop-shadow(0 0 5px rgba(168,85,247,0.85)) drop-shadow(0 0 10px rgba(168,85,247,0.45))' }}
+                      />
+                    </svg>
+                    <div className="w-3.5 h-3.5 rounded-full relative z-10"
                       style={{ background: 'radial-gradient(circle, #e9d5ff 0%, #a855f7 50%, #7c3aed 100%)', boxShadow: '0 0 10px rgba(168,85,247,1), 0 0 22px rgba(168,85,247,0.75), 0 0 40px rgba(168,85,247,0.4)' }} />
                   </div>
                   <div className="flex flex-col gap-1.5">
