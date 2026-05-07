@@ -62,11 +62,6 @@ export default function ChatWidget() {
           </div>
         )}
         <div className="relative">
-          {/* Pulsing rings */}
-          {!open && <>
-            <span className="absolute inset-0 rounded-full animate-ping" style={{ background: 'rgba(124,58,237,0.25)', animationDuration: '2s' }} />
-            <span className="absolute -inset-1.5 rounded-full" style={{ border: '1px solid rgba(168,85,247,0.3)', animation: 'pulse-glow 2s ease-in-out infinite' }} />
-          </>}
           <button onClick={() => setOpen(o => !o)} aria-label="Chat"
             className="relative w-14 h-14 rounded-full flex items-center justify-center transition-all"
             style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', boxShadow: '0 0 24px rgba(124,58,237,0.55), 0 4px 15px rgba(0,0,0,0.4)' }}

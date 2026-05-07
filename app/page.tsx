@@ -36,15 +36,42 @@ const WORKS = [
   { name: 'Another Planet Barbershop', url: 'https://another-planet-barbershop.vercel.app',  sunColor: 'rgba(249,115,22,0.6)',  border: 'rgba(249,115,22,0.45)', accent: '#f97316', tag: 'Barbershop · Lansing, MI' },
 ]
 
-const FULL_TEXT = 'TM Design'
+const LINE1 = 'TM Design'
+const LINE2 = 'Where your thoughts become reality'
+const PHOTOS = ['/aboutme.jpg', '/msufan.jpg', '/ship.jpg']
 
 export default function Page() {
-  const [typed,    setTyped]    = useState('')
+  const [line1,    setLine1]    = useState('')
+  const [line2,    setLine2]    = useState('')
+  const [phase,    setPhase]    = useState(0)
   const [scrolled, setScrolled] = useState(false)
+  const [photoIdx, setPhotoIdx] = useState(0)
+  const [photoVis, setPhotoVis] = useState(true)
 
+  // Two-line typing: "TM Design" pause then "Where your thoughts become reality"
   useEffect(() => {
-    let i = 0
-    const id = setInterval(() => { i++; setTyped(FULL_TEXT.slice(0, i)); if (i >= FULL_TEXT.length) clearInterval(id) }, 90)
+    if (phase === 0) {
+      let i = 0
+      const id = setInterval(() => { i++; setLine1(LINE1.slice(0, i)); if (i >= LINE1.length) { clearInterval(id); setPhase(1) } }, 90)
+      return () => clearInterval(id)
+    }
+    if (phase === 1) {
+      const id = setTimeout(() => setPhase(2), 1300)
+      return () => clearTimeout(id)
+    }
+    if (phase === 2) {
+      let i = 0
+      const id = setInterval(() => { i++; setLine2(LINE2.slice(0, i)); if (i >= LINE2.length) { clearInterval(id); setPhase(3) } }, 48)
+      return () => clearInterval(id)
+    }
+  }, [phase])
+
+  // Photo carousel with fade
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPhotoVis(false)
+      setTimeout(() => { setPhotoIdx(i => (i + 1) % PHOTOS.length); setPhotoVis(true) }, 400)
+    }, 3200)
     return () => clearInterval(id)
   }, [])
 
@@ -84,7 +111,7 @@ export default function Page() {
               style={{ background: 'linear-gradient(135deg, var(--purple), var(--purple-mid))', color: '#fff', boxShadow: '0 0 18px rgba(124,58,237,0.4)' }}
               onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(168,85,247,0.6)' }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 18px rgba(124,58,237,0.4)' }}
-            >Hire Me</a>
+            >Contact</a>
           </div>
         </div>
       </nav>
@@ -101,10 +128,18 @@ export default function Page() {
             Web &amp; AI Solutions for Local Business
           </div>
 
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
-            style={{ background: 'linear-gradient(135deg, var(--purple-mid) 0%, var(--cyan) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', minHeight: '1.2em' }}>
-            {typed}<span className="inline-block w-[3px] align-middle ml-1 rounded" style={{ height: '0.85em', background: 'var(--cyan)', animation: 'type-cursor 1s step-end infinite' }} />
-          </h1>
+          <div className="flex flex-col items-center gap-3">
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
+              style={{ background: 'linear-gradient(135deg, var(--purple-mid) 0%, var(--cyan) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              {line1}
+              {phase <= 1 && <span className="inline-block w-[3px] align-middle ml-1 rounded" style={{ height: '0.85em', background: 'var(--cyan)', animation: 'type-cursor 1s step-end infinite' }} />}
+            </h1>
+            <div className="text-xl sm:text-2xl font-semibold min-h-[2rem]"
+              style={{ color: 'rgba(200,190,255,0.85)', letterSpacing: '0.01em' }}>
+              {line2}
+              {phase === 2 && <span className="inline-block w-[2px] align-middle ml-0.5 rounded" style={{ height: '0.8em', background: 'rgba(200,190,255,0.85)', animation: 'type-cursor 1s step-end infinite' }} />}
+            </div>
+          </div>
 
           <p className="text-lg sm:text-xl font-light leading-relaxed" style={{ color: 'rgba(220,215,255,0.75)', maxWidth: '480px' }}>
             Custom websites and AI-powered tools for local businesses in Lansing, MI.
@@ -301,9 +336,9 @@ export default function Page() {
               <div className="absolute" style={{ width: '260px', height: '260px', background: 'radial-gradient(circle, rgba(124,58,237,0.45) 0%, transparent 70%)', filter: 'blur(22px)', borderRadius: '50%' }} />
               <div className="relative z-10 overflow-hidden rounded-2xl"
                 style={{ width: '210px', height: '260px', border: '1px solid rgba(124,58,237,0.4)', boxShadow: '0 0 40px rgba(124,58,237,0.3)' }}>
-                <img src="/aboutme.jpg" alt="Trey"
+                <img src={PHOTOS[photoIdx]} alt="Trey"
                   className="w-full h-full object-cover"
-                  style={{ objectPosition: '75% center', transform: 'scale(1.15)', transformOrigin: 'right center' }}
+                  style={{ objectPosition: '75% center', transform: 'scale(1.15)', transformOrigin: 'right center', opacity: photoVis ? 1 : 0, transition: 'opacity 0.4s ease' }}
                 />
               </div>
             </div>
@@ -327,9 +362,9 @@ export default function Page() {
               </div>
               <div className="grid grid-cols-3 gap-3">
                 {[{ value: '2+', label: 'Sites Launched' }, { value: 'AI', label: 'Chat Built In' }, { value: '$0', label: 'Templates Used' }].map((s, i) => (
-                  <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border" style={{ borderColor: 'var(--border)', background: 'var(--card)' }}>
-                    <div className="text-2xl font-black" style={{ background: 'linear-gradient(135deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.value}</div>
-                    <div className="text-[11px] text-center leading-tight" style={{ color: 'var(--muted)' }}>{s.label}</div>
+                  <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border" style={{ borderColor: 'rgba(245,158,11,0.25)', background: 'rgba(245,158,11,0.07)' }}>
+                    <div className="text-2xl font-black" style={{ color: '#f59e0b', textShadow: '0 0 18px rgba(245,158,11,0.9), 0 0 40px rgba(251,191,36,0.55), 0 0 70px rgba(245,158,11,0.25)' }}>{s.value}</div>
+                    <div className="text-[11px] text-center leading-tight" style={{ color: 'rgba(251,191,36,0.65)' }}>{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -342,7 +377,7 @@ export default function Page() {
       <section id="contact" className="relative py-24 px-6 z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>Contact</p>
+            <p className="text-xs font-semibold tracking-[0.4em] uppercase mb-3" style={{ color: 'var(--purple-mid)' }}>Contact Me</p>
             <h2 className="text-4xl sm:text-5xl font-black">Let&apos;s Build Something</h2>
             <p className="text-sm mt-4" style={{ color: 'var(--muted)' }}>Ready to get your business online? Here&apos;s how it works.</p>
           </div>
@@ -361,14 +396,6 @@ export default function Page() {
                 <div className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</div>
               </div>
             ))}
-          </div>
-
-          {/* Pricing callout */}
-          <div className="text-center p-6 rounded-2xl border mb-10"
-            style={{ borderColor: 'rgba(124,58,237,0.3)', background: 'rgba(124,58,237,0.07)', boxShadow: '0 0 40px rgba(124,58,237,0.1)' }}>
-            <p className="text-xs font-semibold tracking-[0.3em] uppercase mb-1" style={{ color: 'var(--purple-mid)' }}>Pricing</p>
-            <p className="text-3xl font-black mb-1">Starting at <span style={{ background: 'linear-gradient(135deg, var(--purple-mid), var(--cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$400</span></p>
-            <p className="text-xs" style={{ color: 'var(--muted)' }}>Custom built · Launched in ~2 weeks · $100/mo ongoing maintenance</p>
           </div>
 
           {/* Contact buttons */}
