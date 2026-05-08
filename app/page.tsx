@@ -398,7 +398,11 @@ export default function Page() {
           <div className="text-center mb-14">
             <p className="text-xs tracking-[0.42em] uppercase font-semibold mb-3" style={{ color: '#9333ea' }}>What I Build</p>
             <h2 className="text-4xl sm:text-5xl font-black mb-4">My Skillset</h2>
-            <p className="text-sm max-w-sm mx-auto" style={{ color: 'var(--muted)' }}>
+            <p className="text-sm max-w-sm mx-auto font-semibold px-4 py-2 rounded-full inline-block" style={{
+              background: 'rgba(124,58,237,0.12)',
+              border: '1px solid rgba(168,85,247,0.22)',
+              color: 'var(--text)',
+            }}>
               Every service solves a real problem your business has right now.
             </p>
           </div>
