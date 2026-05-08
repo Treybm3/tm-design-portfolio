@@ -421,6 +421,16 @@ export default function Page() {
                   <h3 className="font-black text-sm" style={{ color: 'var(--text)' }}>{s.name}</h3>
                 </div>
                 <div className="h-px w-full" style={{ background: 'rgba(124,58,237,0.14)' }} />
+                <div className="w-full" style={{ padding: '2px 0' }}>
+                  <div className="h-[5px] w-full rounded-full" style={{ background: 'rgba(124,58,237,0.12)' }}>
+                    <div className="h-full rounded-full" style={{
+                      background: 'linear-gradient(to right, #7c3aed, #a855f7 55%, #06b6d4)',
+                      transformOrigin: 'left center',
+                      animation: `bar-fill 3.2s ease-in-out infinite`,
+                      animationDelay: `${i * 0.45}s`,
+                    }} />
+                  </div>
+                </div>
                 <div>
                   <p className="text-[9px] font-bold uppercase tracking-widest mb-1.5" style={{ color: 'rgba(168,85,247,0.55)' }}>
                     Why it helps you
