@@ -13,13 +13,13 @@ function IconInstagram({ size = 18 }: { size?: number }) {
 }
 
 const SKILLS = [
+  { name: 'Analytics Dashboard',    why: 'See exactly who is visiting, what they are clicking, and where you are losing customers. Make decisions based on real data, not guesses.' },
   { name: 'Custom Websites',        why: 'A site built around your brand, not a template someone else already has. Every page is designed to turn visitors into paying customers the moment they land.' },
+  { name: 'Social Media Marketing', why: 'Get your business in front of people in your area who are already looking for what you offer. Not random traffic, the right people.' },
   { name: 'AI Chat',                why: 'Never miss a customer again. Your AI handles questions and captures leads 24/7, even when you are closed. Clients get answers instantly.' },
   { name: 'Booking Integration',    why: 'Clients book in one tap. No phone tag, no back and forth texts. More confirmed appointments on your calendar, automatically.' },
   { name: 'SEO Optimization',       why: 'Show up on Google when people in your area search for your service. Be the first business they find, not buried on page five.' },
-  { name: 'Analytics Dashboard',    why: 'See exactly who is visiting, what they are clicking, and where you are losing customers. Make decisions based on real data, not guesses.' },
   { name: 'Live Instagram Feed',    why: 'Every time you post on Instagram, your website updates automatically. Fresh content with zero extra effort on your end.' },
-  { name: 'Social Media Marketing', why: 'Get your business in front of people in your area who are already looking for what you offer. Not random traffic, the right people.' },
   { name: 'Photography',            why: 'People decide whether to trust your business before they ever walk in. Professional photos make them choose you over the competition.' },
 ]
 
@@ -360,21 +360,24 @@ export default function Page() {
                 </p>
               </div>
 
-              {WORKS.map((w, i) => (
-                <div key={i} className="flex flex-col gap-3 p-5 rounded-2xl"
-                  style={{
-                    border: `1px solid ${w.color}30`,
-                    background: `linear-gradient(135deg, ${w.color}0c 0%, rgba(10,8,22,0.6) 100%)`,
-                    backdropFilter: 'blur(12px)',
-                  }}>
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-2 h-2 rounded-full shrink-0" style={{ background: w.color, boxShadow: `0 0 8px ${w.color}` }} />
-                    <p className="text-xs font-bold tracking-[0.18em] uppercase" style={{ color: w.color }}>{w.name}</p>
-                    <span className="text-[10px] ml-1" style={{ color: 'var(--dim)' }}>{w.tag}</span>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {WORKS.map((w, i) => (
+                  <div key={i} className="flex-1 flex flex-col gap-3 p-5 rounded-2xl"
+                    style={{
+                      border: `1px solid ${w.color}30`,
+                      background: `linear-gradient(145deg, ${w.color}0e 0%, rgba(10,8,22,0.65) 100%)`,
+                      backdropFilter: 'blur(12px)',
+                    }}>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <div className="w-2 h-2 rounded-full shrink-0" style={{ background: w.color, boxShadow: `0 0 8px ${w.color}` }} />
+                      <p className="text-xs font-bold tracking-[0.16em] uppercase" style={{ color: w.color }}>{w.name}</p>
+                    </div>
+                    <p className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: 'var(--dim)' }}>{w.tag}</p>
+                    <div className="h-px w-full" style={{ background: `${w.color}22` }} />
+                    <p className="text-xs leading-relaxed flex-1" style={{ color: 'var(--muted)' }}>{w.desc}</p>
                   </div>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{w.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
 
               <a href="#contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 font-black text-sm transition-all self-start whitespace-nowrap"
@@ -414,8 +417,7 @@ export default function Page() {
                 onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = 'rgba(124,58,237,0.16)'; el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.22)'; el.style.transform = 'translateY(0)' }}
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full shrink-0"
-                    style={{ background: 'radial-gradient(circle, #e9d5ff, #a855f7)', boxShadow: '0 0 8px rgba(168,85,247,1), 0 0 16px rgba(168,85,247,0.5)' }} />
+                  <SkillRing delay={`${i * 0.45}s`} />
                   <h3 className="font-black text-sm" style={{ color: 'var(--text)' }}>{s.name}</h3>
                 </div>
                 <div className="h-px w-full" style={{ background: 'rgba(124,58,237,0.14)' }} />
@@ -480,9 +482,9 @@ export default function Page() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { value: '2+',   label: 'Sites Launched' },
-                  { value: '2 wk', label: 'Avg Launch Time' },
-                  { value: '24/7', label: 'AI Built In' },
+                  { value: '✦',    label: 'Multiple Sites Launched' },
+                  { value: '1 wk', label: 'Avg. Launch Time' },
+                  { value: '< />',  label: 'Custom + AI Code' },
                 ].map((s, i) => (
                   <div key={i} className="flex flex-col items-center gap-1.5 p-4 rounded-2xl border"
                     style={{ borderColor: 'rgba(217,119,6,0.24)', background: 'rgba(217,119,6,0.07)' }}>
@@ -674,6 +676,26 @@ export default function Page() {
       </div>
 
     </main>
+  )
+}
+
+// ── Skill Ring ────────────────────────────────────────────────────────────────
+function SkillRing({ delay = '0s' }: { delay?: string }) {
+  const r = 7
+  const circ = +(2 * Math.PI * r).toFixed(2) // 43.98
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" style={{ overflow: 'visible', flexShrink: 0 }}>
+      {/* Track */}
+      <circle cx="11" cy="11" r={r} fill="none" stroke="rgba(168,85,247,0.16)" strokeWidth="1.5" />
+      {/* Animated fill ring */}
+      <circle cx="11" cy="11" r={r} fill="none" strokeWidth="1.5" strokeLinecap="round"
+        strokeDasharray={`${circ} ${circ}`}
+        transform="rotate(-90 11 11)"
+        style={{ animation: `ring-fill 3.2s ease-in-out infinite`, animationDelay: delay }} />
+      {/* Center dot */}
+      <circle cx="11" cy="11" r="3.2" fill="#e9d5ff"
+        style={{ filter: 'drop-shadow(0 0 4px rgba(168,85,247,0.9))' }} />
+    </svg>
   )
 }
 

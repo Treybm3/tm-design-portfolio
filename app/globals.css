@@ -55,6 +55,13 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-outfit
   100% { opacity: 0.4;  transform: scale(0.85); filter: blur(34px); }
 }
 
+@keyframes ring-fill {
+  0%       { stroke-dashoffset: 44; stroke: rgba(168,85,247,0.4); }
+  68%      { stroke-dashoffset: 3;  stroke: rgba(168,85,247,0.88); }
+  78%, 88% { stroke-dashoffset: 0;  stroke: #c084fc; filter: drop-shadow(0 0 5px rgba(192,132,252,0.9)); }
+  100%     { stroke-dashoffset: 44; stroke: rgba(168,85,247,0.4); filter: none; }
+}
+
 @keyframes marquee-left {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
