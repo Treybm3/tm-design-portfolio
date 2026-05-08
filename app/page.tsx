@@ -264,87 +264,91 @@ export default function Page() {
             <div className="flex items-center shrink-0">
 
               {/* Kris */}
-              <div className="relative flex flex-col items-center gap-3">
-                <div className="absolute pointer-events-none" style={{
-                  width: '310px', height: '370px', top: '50%', left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.65) 0%, rgba(59,130,246,0.28) 35%, transparent 68%)',
-                  animation: 'lightsaber-pulse 3s ease-in-out infinite',
-                  borderRadius: '50%', zIndex: 0,
-                }} />
-                <p className="relative z-10 text-[10px] font-bold tracking-[0.22em] uppercase"
+              <div className="flex flex-col items-center gap-3">
+                <p className="text-[10px] font-bold tracking-[0.22em] uppercase"
                   style={{ color: '#3b82f6', textShadow: '0 0 12px rgba(59,130,246,0.8)' }}>
                   Kris Professional Cuts
                 </p>
-                <a href="https://krisprofessionalcuts.com" target="_blank" rel="noopener noreferrer"
-                  className="relative z-10 rounded-2xl overflow-hidden"
-                  style={{
-                    display: 'block', width: '220px', height: '260px',
-                    border: '1.5px solid rgba(59,130,246,0.5)',
-                    background: '#060a12', padding: '8px',
-                    boxShadow: '0 0 40px rgba(59,130,246,0.38)',
-                    animation: 'gentle-shake 2.5s linear infinite',
-                  }}>
-                  <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: '10px' }}>
-                    <iframe src="https://krisprofessionalcuts.com" title="Kris Professional Cuts"
-                      style={{ width: '880px', height: '1040px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
-                      loading="lazy" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xs font-black tracking-[0.22em] uppercase"
-                        style={{ color: '#4ade80', textShadow: '0 0 14px rgba(74,222,128,1), 0 0 28px rgba(74,222,128,0.7)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
-                        Visit Site
-                      </span>
+                <div className="relative">
+                  <div className="absolute pointer-events-none" style={{
+                    width: '310px', height: '310px', top: '50%', left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.65) 0%, rgba(59,130,246,0.28) 35%, transparent 68%)',
+                    animation: 'lightsaber-pulse 3s ease-in-out infinite',
+                    borderRadius: '50%', zIndex: 0,
+                  }} />
+                  <a href="https://krisprofessionalcuts.com" target="_blank" rel="noopener noreferrer"
+                    className="relative z-10 rounded-2xl overflow-hidden"
+                    style={{
+                      display: 'block', width: '220px', height: '260px',
+                      border: '1.5px solid rgba(59,130,246,0.5)',
+                      background: '#060a12', padding: '8px',
+                      boxShadow: '0 0 40px rgba(59,130,246,0.38)',
+                      animation: 'gentle-shake 2.5s linear infinite',
+                    }}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: '10px' }}>
+                      <iframe src="https://krisprofessionalcuts.com" title="Kris Professional Cuts"
+                        style={{ width: '880px', height: '1040px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
+                        loading="lazy" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xs font-black tracking-[0.22em] uppercase"
+                          style={{ color: '#4ade80', textShadow: '0 0 14px rgba(74,222,128,1), 0 0 28px rgba(74,222,128,0.7)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
+                          Visit Site
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
 
               {/* Center divider */}
               <div className="flex flex-col items-center gap-3 px-5 self-stretch justify-center" style={{ minHeight: '300px' }}>
-                <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.5), transparent)' }} />
-                <div className="w-9 h-9 rounded-full flex items-center justify-center"
-                  style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(168,85,247,0.4)', boxShadow: '0 0 20px rgba(124,58,237,0.55)' }}>
-                  <span style={{ color: '#a855f7', fontSize: '11px' }}>✦</span>
+                <div className="flex-1" style={{ width: '2px', background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.6), transparent)' }} />
+                <div className="w-11 h-11 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(124,58,237,0.15)', border: '1.5px solid rgba(168,85,247,0.5)', boxShadow: '0 0 24px rgba(124,58,237,0.65)' }}>
+                  <span style={{ color: '#a855f7', fontSize: '13px' }}>✦</span>
                 </div>
-                <div className="w-px flex-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.5), transparent)' }} />
+                <div className="flex-1" style={{ width: '2px', background: 'linear-gradient(to bottom, transparent, rgba(168,85,247,0.6), transparent)' }} />
               </div>
 
               {/* Another Planet */}
-              <div className="relative flex flex-col items-center gap-3">
-                <div className="absolute pointer-events-none" style={{
-                  width: '310px', height: '370px', top: '50%', left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  background: 'radial-gradient(ellipse at center, rgba(249,115,22,0.65) 0%, rgba(249,115,22,0.28) 35%, transparent 68%)',
-                  animation: 'lightsaber-pulse 3s ease-in-out infinite',
-                  animationDelay: '1.5s',
-                  borderRadius: '50%', zIndex: 0,
-                }} />
-                <p className="relative z-10 text-[10px] font-bold tracking-[0.22em] uppercase"
+              <div className="flex flex-col items-center gap-3">
+                <p className="text-[10px] font-bold tracking-[0.22em] uppercase"
                   style={{ color: '#f97316', textShadow: '0 0 12px rgba(249,115,22,0.8)' }}>
                   Another Planet Barbershop
                 </p>
-                <a href="https://another-planet-barbershop.vercel.app" target="_blank" rel="noopener noreferrer"
-                  className="relative z-10 rounded-2xl overflow-hidden"
-                  style={{
-                    display: 'block', width: '220px', height: '260px',
-                    border: '1.5px solid rgba(249,115,22,0.5)',
-                    background: '#060a12', padding: '8px',
-                    boxShadow: '0 0 40px rgba(249,115,22,0.38)',
-                    animation: 'gentle-shake 2.5s linear infinite',
-                    animationDelay: '1.25s',
-                  }}>
-                  <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: '10px' }}>
-                    <iframe src="https://another-planet-barbershop.vercel.app" title="Another Planet Barbershop"
-                      style={{ width: '880px', height: '1040px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
-                      loading="lazy" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xs font-black tracking-[0.22em] uppercase"
-                        style={{ color: '#4ade80', textShadow: '0 0 14px rgba(74,222,128,1), 0 0 28px rgba(74,222,128,0.7)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
-                        Visit Site
-                      </span>
+                <div className="relative">
+                  <div className="absolute pointer-events-none" style={{
+                    width: '310px', height: '310px', top: '50%', left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    background: 'radial-gradient(ellipse at center, rgba(249,115,22,0.65) 0%, rgba(249,115,22,0.28) 35%, transparent 68%)',
+                    animation: 'lightsaber-pulse 3s ease-in-out infinite',
+                    animationDelay: '1.5s',
+                    borderRadius: '50%', zIndex: 0,
+                  }} />
+                  <a href="https://another-planet-barbershop.vercel.app" target="_blank" rel="noopener noreferrer"
+                    className="relative z-10 rounded-2xl overflow-hidden"
+                    style={{
+                      display: 'block', width: '220px', height: '260px',
+                      border: '1.5px solid rgba(249,115,22,0.5)',
+                      background: '#060a12', padding: '8px',
+                      boxShadow: '0 0 40px rgba(249,115,22,0.38)',
+                      animation: 'gentle-shake 2.5s linear infinite',
+                      animationDelay: '1.25s',
+                    }}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: '10px' }}>
+                      <iframe src="https://another-planet-barbershop.vercel.app" title="Another Planet Barbershop"
+                        style={{ width: '880px', height: '1040px', border: 'none', transform: 'scale(0.25)', transformOrigin: 'top left', pointerEvents: 'none' }}
+                        loading="lazy" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xs font-black tracking-[0.22em] uppercase"
+                          style={{ color: '#4ade80', textShadow: '0 0 14px rgba(74,222,128,1), 0 0 28px rgba(74,222,128,0.7)', animation: 'click-pulse 2.4s ease-in-out infinite' }}>
+                          Visit Site
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -352,9 +356,18 @@ export default function Page() {
             <div className="flex-1 flex flex-col gap-7">
               <div>
                 <p className="text-xs font-semibold tracking-[0.38em] uppercase mb-3" style={{ color: '#9333ea' }}>What These Sites Do</p>
-                <h3 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: 'var(--text)' }}>
-                  Built to Make Businesses More Money
-                </h3>
+                <div className="flex items-center gap-4 mb-4 flex-wrap">
+                  <h3 className="text-2xl sm:text-3xl font-black" style={{ color: 'var(--text)' }}>
+                    Built to Make Businesses More Money
+                  </h3>
+                  <a href="#contact"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 font-black text-sm transition-all shrink-0 whitespace-nowrap"
+                    style={{ ...pillBase }}
+                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 42px rgba(124,58,237,0.72)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                    onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'none' }}>
+                    Contact Me <ChevronRight size={14} />
+                  </a>
+                </div>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
                   Both sites are built around one goal: making the business more revenue without the owner doing extra work. Clients book themselves, questions get answered automatically, and Google rankings handle the marketing.
                 </p>
@@ -378,14 +391,6 @@ export default function Page() {
                   </div>
                 ))}
               </div>
-
-              <a href="#contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 font-black text-sm transition-all self-start whitespace-nowrap"
-                style={{ ...pillBase }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 42px rgba(124,58,237,0.72)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = pillBase.boxShadow as string; e.currentTarget.style.transform = 'none' }}>
-                Get a Site Like This <ChevronRight size={14} />
-              </a>
             </div>
           </div>
         </div>
